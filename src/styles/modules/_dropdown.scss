@@ -1,0 +1,33 @@
+.dropdown{
+    position: relative;
+    user-select: none;
+
+    &-title{
+        @include flexSetting(space-between, center);
+        font-size: 1.3rem;
+    }
+    &-ic{
+        margin-right: 1rem;
+    }
+    &-lists{
+        border-top: 1px solid $primary-color;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        font-size: 1.3em;
+
+        & > .dropdown-list{
+            cursor: pointer;
+            &:hover{
+                background-color: $dark-accent;
+                color: $secondary-color;
+            }
+        }
+
+    }
+    &-selected{
+        background-color: $dark-accent;
+        color: white;
+        font-weight: bold;
+    }
+}
