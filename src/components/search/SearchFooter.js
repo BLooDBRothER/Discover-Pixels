@@ -2,9 +2,9 @@ import React from 'react';
 
 const SearchFooter = () => {
     return (
-        <div>
-            <div>Photo</div>
-            <div>Video</div>
+        <div className='search-footer'>
+            <div className='search-footer-link'>Photo</div>
+            <div className='search-footer-link'>Video</div>
         </div>
     )
 }

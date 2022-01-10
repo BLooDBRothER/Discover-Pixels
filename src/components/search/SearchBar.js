@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { FaSearch } from 'react-icons/fa';
 import Dropdown from '../dropdown/Dropdown';
 
@@ -22,6 +22,14 @@ const dropDownItems = [
 ]
 
 const SearchBar = () => {
+    const [isOpen, setIsOpen] = useState(false);
+    const dropdownRef = useRef(null);
+
+    useEffect(() => {
+        dropdownRef.current.style.borderRadius = isOpen ? "0px 25px 0px 0px" : "0px 25px 25px 0";
+        
+    }, [isOpen])
+
     return (
         <form className='search-form'>
             <div className='search-input'>
@@ -30,7 +38,10 @@ const SearchBar = () => {
             </div>
             <Dropdown
              classValue="search-dropdown"
+             isOpen={isOpen}
+             setIsOpen={setIsOpen}
              items={dropDownItems}
+             dropdownRef={dropdownRef}
             />
         </form>
     )

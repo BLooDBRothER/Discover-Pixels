@@ -30,7 +30,7 @@
         @include flexSetting(flex-start, center);
         flex: 1;
         &-value, &-ic{
-            background-color: rgba(255, 255, 255, 0.6);
+            background-color: rgba(255, 255, 255, 0.5);
         }
 
         &-value{
@@ -44,11 +44,15 @@
 
         &-ic{
             width: 40px;
-            height: 30px;
-            padding: 5px 0;
+            height: 20px;
+            padding: 10px 0;
             box-sizing: unset;
             fill: $dark-accent;
             cursor: pointer;
+
+            &:hover{
+                filter: brightness(.8);
+            }
         }
     }
 
@@ -58,16 +62,30 @@
             height: 40px;
             border-radius: 0 25px 25px 0;
             padding: .5rem 0 0.5rem 1rem;
-            background-color: rgba(255, 255, 255, 0.6);
+            color: $secondary-color;
+            background-color: rgba(0, 0, 0, 0.35);
         }
 
         & .dropdown-lists{
-            background-color: rgba(255, 255, 255, 0.6);
+            background-color: rgba(0, 0, 0, 0.35);
+            color: $secondary-color;
+            border-color: $secondary-color;
             width: 160px;
-
+            border-radius: 0 0 25px 0;
+            overflow: hidden;
             & > .dropdown-list{
                 padding: .5rem 0 .5rem 1rem;
             }
+        }
+    }
+
+    &-footer{
+        @include flexSetting(space-between, center);
+
+        &-link{
+            color: $secondary-color;
+            font-size: 1.3rem;
+            margin: 0 3rem;
         }
     }
     

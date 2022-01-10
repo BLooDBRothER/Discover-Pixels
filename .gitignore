@@ -25,3 +25,4 @@ yarn-error.log*
 
 # my ignores
 src/api.rest
+.netlify/
