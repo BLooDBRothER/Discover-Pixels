@@ -1,0 +1,74 @@
+.search{
+    @include flexSetting(space-around, center, true);
+    min-height: 500px;
+    background: url('../../Assets/searchBg-1.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    position: relative;
+    &::after{
+        content: '';
+        background-color: rgba(0, 0, 0, 0.2);
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        // z-index: 0;
+        position: absolute;
+    }
+
+    & > *{
+        z-index: 2;
+    }
+
+    &-form{
+        @include flexSetting(flex-start, center);
+        width: 35%;
+    }
+
+    &-input{
+        @include flexSetting(flex-start, center);
+        flex: 1;
+        &-value, &-ic{
+            background-color: rgba(255, 255, 255, 0.6);
+        }
+
+        &-value{
+            flex: 1;
+            font-size: 1.3rem;
+            border-radius: 25px 0 0 25px;
+            padding: .5rem 1rem;
+            border: none;
+            outline: none;
+        }
+
+        &-ic{
+            width: 40px;
+            height: 30px;
+            padding: 5px 0;
+            box-sizing: unset;
+            fill: $dark-accent;
+            cursor: pointer;
+        }
+    }
+
+    &-dropdown{
+        & .dropdown-title{
+            width: 160px;
+            height: 40px;
+            border-radius: 0 25px 25px 0;
+            padding: .5rem 0 0.5rem 1rem;
+            background-color: rgba(255, 255, 255, 0.6);
+        }
+
+        & .dropdown-lists{
+            background-color: rgba(255, 255, 255, 0.6);
+            width: 160px;
+
+            & > .dropdown-list{
+                padding: .5rem 0 .5rem 1rem;
+            }
+        }
+    }
+    
+}
