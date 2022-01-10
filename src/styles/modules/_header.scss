@@ -7,12 +7,22 @@
         cursor: pointer;
     }
 
+    &-nav {
+        @include flexSetting(flex-start, center);
+    }
+
     &-link{
+        @include flexSetting(flex-start, center);
         color: $secondary-color;
         margin: 0 1rem;
         font-size: 1.4rem;
         cursor: pointer;
         position: relative;
+
+        &-ic{
+            margin-right: .5rem;
+            color: $light-accent;
+        }
 
         &:hover{
             color: $light-accent;
@@ -27,7 +37,7 @@
             position: absolute;
             bottom: 0;
             left: 0;
-            animation: drawLine 1s ease;
+            animation: drawLine .5s ease;
         }
 
         &:hover:after{
