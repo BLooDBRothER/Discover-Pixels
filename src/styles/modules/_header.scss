@@ -1,0 +1,48 @@
+.header{
+    padding: 1rem 2rem;
+    @include flexSetting(space-between, center);
+    color: $secondary-color;
+
+    &-title{
+        cursor: pointer;
+    }
+
+    &-link{
+        color: $secondary-color;
+        margin: 0 1rem;
+        font-size: 1.4rem;
+        cursor: pointer;
+        position: relative;
+
+        &:hover{
+            color: $light-accent;
+        }
+
+        &::after{
+            content: '';
+            display: none;
+            width: 100%;
+            height: 2px;
+            background-color: $light-accent;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            animation: drawLine 1s ease;
+        }
+
+        &:hover:after{
+            display: initial;
+        }
+    }
+}
+
+@keyframes drawLine {
+    0%{
+        left: 50%;
+        width: 0;
+    }
+    100%{
+        left: 0;
+        width: 100%;
+    }
+}
