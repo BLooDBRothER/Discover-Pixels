@@ -33,7 +33,7 @@ const SearchBar = () => {
     return (
         <form className='search-form'>
             <div className='search-input'>
-                <input type="text" placeholder='Search Images powered By pixabay' className='search-input-value' />
+                <input type="text" placeholder='Search Images powered By pixabay' className='search-input-value'  />
                 <FaSearch className='search-input-ic'/>
             </div>
             <Dropdown
@@ -42,6 +42,7 @@ const SearchBar = () => {
              setIsOpen={setIsOpen}
              items={dropDownItems}
              dropdownRef={dropdownRef}
+             enableHoverEffect={true}
             />
         </form>
     )

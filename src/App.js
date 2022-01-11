@@ -4,7 +4,7 @@ import Header from './components/header/Header';
 import Search from './components/search/Search';
 
 function App() {
-  const [isNavbarVisible, setisNavbarVisible] = useState(false);
+  const [isNavbarVisible, setIsNavbarVisible] = useState(false);
   return (
     <BrowserRouter>
       <Header isNavbarVisible={isNavbarVisible} />
