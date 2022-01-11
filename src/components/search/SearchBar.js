@@ -5,19 +5,19 @@ import Dropdown from '../dropdown/Dropdown';
 const dropDownItems = [
     {
         id: 1,
-        type: "All"
+        value: "All"
     },
     {
         id: 2,
-        type: "Photo"
+        value: "Photo"
     },
     {
         id: 3,
-        type: "Illustration"
+        value: "Illustration"
     },
     {
         id: 4,
-        type: "Vector"
+        value: "Vector"
     },
 ]
 

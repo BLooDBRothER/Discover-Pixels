@@ -13,7 +13,7 @@ const DropdownList = ({item, selected, setSelcted, setIsOpen}) => {
          className={`dropdown-list ${selected.id === item.id ? "dropdown-selected" : ""}`}
          onClick={handleSelection}
         >
-            {item.type}
+            {item.value}
         </div>
     );
 };

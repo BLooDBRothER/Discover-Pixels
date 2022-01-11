@@ -1,0 +1,25 @@
+.home-photos{
+    @include flexSetting(flex-start, flex-start, true);
+    padding: 1.4rem;
+
+    &-dropdown, & .dropdown-lists{
+        width: 150px;
+        background-color: $secondary-color;
+    }
+    &-dropdown{
+        align-self: flex-end;
+        border-radius: 10px 10px 0 0;
+    }
+    & .dropdown-title{
+        padding: .2rem 0 .2rem 1rem;
+    }
+    & .dropdown-lists{
+        border-radius: 0 0 10px 10px;
+        overflow: hidden;
+    }
+    & .dropdown-list{
+        padding: .5rem;
+    }
+
+    
+}
