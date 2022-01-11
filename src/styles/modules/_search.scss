@@ -1,11 +1,15 @@
 .search{
     @include flexSetting(space-around, center, true);
     min-height: 500px;
-    background: url('../../Assets/searchBg-1.jpg');
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
     position: relative;
+
+    &-backdrop{
+        background: url('../../Assets/searchBg-1.jpg');
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+    }
+
     &::after{
         content: '';
         background-color: rgba(0, 0, 0, 0.2);
@@ -96,7 +100,7 @@
             }
         }
 
-        &-link-selected{
+        &-link.active{
             background-color: rgba(54, 71, 222, 0.5);
         }
     }

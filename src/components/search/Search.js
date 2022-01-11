@@ -6,7 +6,7 @@ const Search = () => {
    
 
     return (
-        <div className='search'>
+        <div className='search search-backdrop'>
             <h1>Discover your Pixels Here !!!!</h1>
             <SearchBar />
             <SearchFooter />

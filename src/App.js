@@ -1,12 +1,15 @@
+import React, { useState } from "react";
+import { BrowserRouter } from 'react-router-dom';
 import Header from './components/header/Header';
 import Search from './components/search/Search';
 
 function App() {
+  const [isNavbarVisible, setisNavbarVisible] = useState(false);
   return (
-    <>
-      <Header />
+    <BrowserRouter>
+      <Header isNavbarVisible={isNavbarVisible} />
       <Search />
-    </>
+    </BrowserRouter>
   );
 }
 

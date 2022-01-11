@@ -1,10 +1,11 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 
 const SearchFooter = () => {
     return (
         <div className='search-footer'>
-            <div className='search-footer-link search-footer-link-selected'>Photo</div>
-            <div className='search-footer-link'>Video</div>
+            <NavLink to="/" className='search-footer-link'>Photo</NavLink>
+            <NavLink to="/video" className='search-footer-link'>Video</NavLink>
         </div>
     )
 }
