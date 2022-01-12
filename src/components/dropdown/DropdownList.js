@@ -1,8 +1,9 @@
 import React from "react";
 
-const DropdownList = ({item, selected, setSelcted, setIsOpen}) => {
+const DropdownList = ({item, selected, setSelcted, setIsOpen, setSelectedValue}) => {
     const handleSelection = () => {
         if(selected.id === item.id) return;
+        setSelectedValue(item.value);
         setSelcted(item);
         setIsOpen(false);
     }

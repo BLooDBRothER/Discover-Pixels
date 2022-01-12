@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { FaCaretDown, FaCaretUp } from 'react-icons/fa';
 import DropdownList from './DropdownList';
 
-const Dropdown = ({classValue, isOpen, setIsOpen, items, dropdownRef=null, enableHoverEffect=false}) => {
+const Dropdown = ({classValue, setSelectedValue, isOpen, setIsOpen, items, dropdownRef=null, enableHoverEffect=false}) => {
     
     const [selected, setSelected] = useState({});
     const dropdownListRef = useRef(null);
@@ -37,7 +37,7 @@ const Dropdown = ({classValue, isOpen, setIsOpen, items, dropdownRef=null, enabl
             {isOpen && (
                 <div className='dropdown-lists' ref={dropdownListRef}>
                     {items.map(item => (
-                        <DropdownList key={item.id} item={item} selected={selected} setIsOpen={setIsOpen} setSelcted={setSelected}/>
+                        <DropdownList key={item.id} item={item} selected={selected} setIsOpen={setIsOpen} setSelcted={setSelected} setSelectedValue={setSelectedValue} />
                     ))}
                 </div>
             )}

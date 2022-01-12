@@ -23,7 +23,12 @@ const dropDownItems = [
 
 const SearchBar = () => {
     const [isOpen, setIsOpen] = useState(false);
+    const [dropdownValue, setDropdownValue] = useState("All");
     const dropdownRef = useRef(null);
+
+    useEffect(() => {
+        console.log(dropdownValue);
+    }, [dropdownValue])
 
     useEffect(() => {
         dropdownRef.current.style.borderRadius = isOpen ? "0px 25px 0px 0px" : "0px 25px 25px 0";
@@ -37,6 +42,7 @@ const SearchBar = () => {
             </div>
             <Dropdown
              classValue="search-dropdown"
+             setSelectedValue={setDropdownValue}
              isOpen={isOpen}
              setIsOpen={setIsOpen}
              items={dropDownItems}
