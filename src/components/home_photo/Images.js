@@ -5,9 +5,10 @@ const Images = ({imageItems, containers, lastImageRef}) => {
     
     const imageContainersRef = useRef(null);
     const [containerList, setContainerList] = useState([]);
+    const [hasMore, setHasMore] = useState(true);
+
 
     useEffect(() => {
-        console.log("container", containers);
         let list = [];
         for(let i=0; i<containers; i++){
             if(i === (containers-1)){

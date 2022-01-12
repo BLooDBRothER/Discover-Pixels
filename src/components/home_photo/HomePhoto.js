@@ -29,24 +29,19 @@ const HomePhoto = () => {
     });
 
     const [isOpen, setIsOpen] = useState(false);
-    const [dropdownValue, setDropdownValue] = useState("popular")
+    const [dropdownValue, setDropdownValue] = useState("popular");
     const [order, setOrder] = useState("popular");
     const [pageNumber, setPageNumber] = useState(1);
 
-    // const imageData = useImageOrderQuery(order, pageNumber);
-    const imageData = imgData;
-
-    useEffect(() => {
-        console.log(imageData);
-    }, [pageNumber, imageData]);
+    const {imageData, hasMore} = useImageOrderQuery(order, pageNumber);
+    // const imageData = imgData;
 
     const observer = useRef();
     const lastImageRef = useCallback((node) => {
         if(!node) return;
-        console.log(node);
+        if(!hasMore) {observer.current?.disconnect(); return;}
         if(observer.current) observer.current.disconnect();
         observer.current = new IntersectionObserver(entries => {
-            console.log(entries[0]);
             if(entries[0].isIntersecting){
                 setPageNumber(prevPage => prevPage+1);
                 observer.current.disconnect();
