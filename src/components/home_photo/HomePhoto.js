@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useMediaQuery } from 'react-responsive';
 import Dropdown from '../dropdown/Dropdown';
 import useImageOrderQuery from './useImageOrderQuery';
 import Images from './Images';
+import { imgData } from './samepleData.js'
 
 const dropdownItems = [
     {
@@ -29,15 +30,38 @@ const HomePhoto = () => {
 
     const [isOpen, setIsOpen] = useState(false);
     const [dropdownValue, setDropdownValue] = useState("popular")
-    const [query, setQuery] = useState("popular");
+    const [order, setOrder] = useState("popular");
+    const [pageNumber, setPageNumber] = useState(1);
 
- 
-    const imageData = useImageOrderQuery(query);
+    // const imageData = useImageOrderQuery(order, pageNumber);
+    const imageData = imgData;
 
     useEffect(() => {
-        console.log(dropdownValue);
-        setQuery(dropdownValue.toLowerCase());
-    }, [dropdownValue])
+        console.log(imageData);
+    }, [pageNumber, imageData]);
+
+    const observer = useRef();
+    const lastImageRef = useCallback((node) => {
+        if(!node) return;
+        console.log(node);
+        if(observer.current) observer.current.disconnect();
+        observer.current = new IntersectionObserver(entries => {
+            console.log(entries[0]);
+            if(entries[0].isIntersecting){
+                setPageNumber(prevPage => prevPage+1);
+                observer.current.disconnect();
+            }
+        },{
+            threshold: 1,
+            rootMargin: "200px"
+        });
+        observer.current.observe(node);
+    }, [imageData]);
+ 
+
+    useEffect(() => {
+        setOrder(dropdownValue.toLowerCase());
+    }, [dropdownValue]);
 
     return (
         <div className='home-photos'>
@@ -49,7 +73,7 @@ const HomePhoto = () => {
              items={dropdownItems}
              setQuery
              />
-            <Images imageItems={imageData} containers={isLargeScreen ? 4 : isMediumScreen ? 3 : isSmallScreen ? 2 : 1} />
+            <Images imageItems={imageData} containers={isLargeScreen ? 4 : isMediumScreen ? 3 : isSmallScreen ? 2 : 1} lastImageRef={lastImageRef} />
             
         </div>
     )

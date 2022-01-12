@@ -27,10 +27,6 @@ const SearchBar = () => {
     const dropdownRef = useRef(null);
 
     useEffect(() => {
-        console.log(dropdownValue);
-    }, [dropdownValue])
-
-    useEffect(() => {
         dropdownRef.current.style.borderRadius = isOpen ? "0px 25px 0px 0px" : "0px 25px 25px 0";
     }, [isOpen]);
 
