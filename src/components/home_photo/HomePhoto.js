@@ -1,8 +1,8 @@
-import axios, { Axios } from 'axios';
 import React, { useState, useEffect } from 'react';
+import { useMediaQuery } from 'react-responsive';
 import Dropdown from '../dropdown/Dropdown';
+import useImageOrderQuery from './useImageOrderQuery';
 import Images from './Images';
-import { imgData } from './samepleData';
 
 const dropdownItems = [
     {
@@ -11,36 +11,46 @@ const dropdownItems = [
     },
     {
         id: 2,
-        value: "Trending"
+        value: "Latest"
     }
 ]
 
-const imageItems = imgData;
-
 const HomePhoto = () => {
+    // Media query
+    const isLargeScreen = useMediaQuery({
+        query: "(min-width: 1750px)",
+    });
+    const isMediumScreen = useMediaQuery({
+        query: "(min-width: 1280px)",
+    });
+    const isSmallScreen = useMediaQuery({
+        query: "(min-width: 880px)"
+    });
+
     const [isOpen, setIsOpen] = useState(false);
-    const [imageUrl, setImageUrl] = useState("https://pixabay.com/api/?key=20726322-5f0bca4f140876f7d307a8d94");
-    const [imageData, setImageData] = useState({});
+    const [dropdownValue, setDropdownValue] = useState("popular")
+    const [query, setQuery] = useState("popular");
 
-    const getData = async () => {
-        const data = await axios.get(imageUrl);
-        console.log(data)
-    }
+ 
+    const imageData = useImageOrderQuery(query);
 
-    // useEffect(() => {
-    //     getData();
-    // }, [imageUrl])
+    useEffect(() => {
+        console.log(dropdownValue);
+        setQuery(dropdownValue.toLowerCase());
+    }, [dropdownValue])
 
     return (
         <div className='home-photos'>
             <Dropdown 
              classValue="home-photos-dropdown"
+             setSelectedValue={setDropdownValue}
              isOpen={isOpen}
              setIsOpen={setIsOpen}
-             items={dropdownItems}/>
-            <Images 
-             imageItems={imageItems}  
-            />
+             items={dropdownItems}
+             setQuery
+             />
+            <Images imageItems={imageData} containers={isLargeScreen ? 4 : isMediumScreen ? 3 : isSmallScreen ? 2 : 1} />
+            
         </div>
     )
 }

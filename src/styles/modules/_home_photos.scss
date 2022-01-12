@@ -20,6 +20,38 @@
     & .dropdown-list{
         padding: .5rem;
     }
+}
 
-    
+.image-containers{
+    @include flexSetting(space-evenly, flex-start);
+    width: 100%;
+    margin: 1.4rem 0;
+    gap: 0 1rem;
+    flex: 1;
+
+    & .image-container{
+        @include flexSetting(flex-start, flex-start, true);
+        gap: 1.4rem 0;
+
+        & > img{
+            display: block;
+        }
+    }
+
+    & .image-4x{
+        width: 430px;
+    }
+
+    & .image-3x{
+        width: clamp(400px, 30vw, 500px);
+    }
+
+    & .image-2x{
+        width: clamp(400px, 45vw, 570px);
+    }
+    & .image-1x{
+        width: 90%;
+        margin: 0 auto;
+    }
+
 }
