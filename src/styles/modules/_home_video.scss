@@ -1,0 +1,33 @@
+.video-containers {
+    & .video-container {
+        @include flexSetting(flex-start, flex-start, true);
+        gap: 1.4rem 0;
+
+        & .video {
+            display: block;
+            position: relative;
+            overflow: hidden;
+
+            & video, & img{
+                background-color: $img-background;
+            }
+
+            & .video-4x{
+                width: 430px;
+            }
+        
+            & .video-3x{
+                width: clamp(400px, 30vw, 500px);
+            }
+        
+            & .video-2x{
+                width: clamp(400px, 45vw, 570px);
+            }
+            & .video-1x{
+                width: 90%;
+                margin: 0 auto;
+            }
+        }
+        
+    }
+}
