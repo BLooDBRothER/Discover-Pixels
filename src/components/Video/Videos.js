@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react';
 import Video from './Video';
 
-const Videos = ({videoItems, containers, lasVideoRef}) => {
+const Videos = ({videoItems, containers, lastVideoRef}) => {
     const imageContainersRef = useRef(null);
     const [containerList, setContainerList] = useState([]);
 
@@ -10,9 +10,10 @@ const Videos = ({videoItems, containers, lasVideoRef}) => {
         let list = [];
         for(let i=0; i<containers; i++){
             if(i === (containers-1)){
+                console.log(lastVideoRef)
                 list.push((
                     <div key={i} className='media-container video-container'>
-                        <Video videoItems={videoItems} indexPosition={i} videoX={containers}  lasVideoRef={lasVideoRef}/>
+                        <Video videoItems={videoItems} indexPosition={i} videoX={containers}  lastVideoRef={lastVideoRef}/>
                     </div>
                 ));
             }
@@ -25,7 +26,7 @@ const Videos = ({videoItems, containers, lasVideoRef}) => {
             }
         }
         setContainerList(list);
-    }, [containers, videoItems, lasVideoRef]);
+    }, [containers, videoItems, lastVideoRef]);
 
     return (
         <div ref={imageContainersRef} className='media-containers video-containers'>

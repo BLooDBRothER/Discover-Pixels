@@ -1,11 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { BiLoaderCircle } from 'react-icons/bi';
 import VideoAuthor from "./VideoAuthor";
 import VideoMetadata from "./VideoMetadata";
 
-const VideoElement = ({src, picId, videoX, author, metadata}) => {
+const VideoElement = ({src, picId, videoX, author, metadata, lastVideoRef=null}) => {
   const [isVideoVisible, setIsVideoVisible] = useState(false);
   const [isVideoLoading, setIsVideoLoading] = useState(false);
+
+  useEffect(() => {
+    console.log(lastVideoRef);
+  }, [lastVideoRef])
 
   const loadVideo = (e) => {
     setIsVideoVisible(true);
@@ -26,7 +30,7 @@ const VideoElement = ({src, picId, videoX, author, metadata}) => {
   }
 
   return (
-    <div className="video" onMouseEnter={loadVideo} onMouseLeave={cancelVideo}  onMouseOut={cancelVideo}>
+    <div className="video" ref={lastVideoRef} onMouseEnter={loadVideo} onMouseLeave={cancelVideo} onMouseOut={cancelVideo}>
       <VideoAuthor authorName={author.name} authorPic={author.url} />
       {isVideoVisible && (
         <video className={`video-${videoX}x video-element ${isVideoLoading ? "none" : ""}`} onLoadedData={afterLoad} loop muted autoPlay controls = ''>

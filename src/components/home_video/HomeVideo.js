@@ -36,6 +36,29 @@ const HomeVideo = () => {
     const {videoData, hasMore} = useVideoOrderQuery(order, pageNumber);
     // const videoData = data;
 
+    const observer = useRef();
+    const lastVideoRef = useCallback((node) => {
+        if(!node) return;
+        if(!hasMore) {observer.current?.disconnect(); return;}
+        if(observer.current) observer.current.disconnect();
+        observer.current = new IntersectionObserver(entries => {
+            if(entries[0].isIntersecting){
+                setPageNumber(prevPage => prevPage+1);
+                observer.current.disconnect();
+            }
+        },{
+            threshold: 1,
+            rootMargin: "300px"
+        });
+        observer.current.observe(node);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+ 
+
+    useEffect(() => {
+        setOrder(dropdownValue.toLowerCase());
+    }, [dropdownValue]);
+
     return (
         <div className='home home-videos'>
             <Dropdown 
@@ -48,6 +71,7 @@ const HomeVideo = () => {
              <Videos
               videoItems={videoData}
               containers={isLargeScreen ? 4 : isMediumScreen ? 3 : isSmallScreen ? 2 : 1}
+              lastVideoRef={lastVideoRef}
             />
         </div>
     )
