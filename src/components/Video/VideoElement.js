@@ -5,7 +5,6 @@ import VideoMetadata from "./VideoMetadata";
 
 const VideoElement = ({src, picId, videoX, author, metadata}) => {
   const [isVideoVisible, setIsVideoVisible] = useState(false);
-  const [isImageVisible, setIsImageVisible] = useState(true);
   const [isVideoLoading, setIsVideoLoading] = useState(false);
 
   const loadVideo = (e) => {
@@ -14,31 +13,33 @@ const VideoElement = ({src, picId, videoX, author, metadata}) => {
   };
 
   const cancelVideo = (e) => {
-    setIsImageVisible(true);
     setIsVideoVisible(false);
     setIsVideoLoading(false);
   }
 
   const afterLoad = (e) => {
     setIsVideoLoading(false);
-    setIsImageVisible(false);
+  }
+
+  const setAutoHeight = (e) => {
+    e.target.style.height = "auto";
   }
 
   return (
     <div className="video" onMouseEnter={loadVideo} onMouseLeave={cancelVideo}  onMouseOut={cancelVideo}>
       <VideoAuthor authorName={author.name} authorPic={author.url} />
       {isVideoVisible && (
-        <video className={`video-${videoX}x ${isImageVisible ? "none" : ""}`} loop="loop" autoPlay="autoplay" onLoadedData={afterLoad}>
+        <video className={`video-${videoX}x video-element ${isVideoLoading ? "none" : ""}`} onLoadedData={afterLoad} loop muted autoPlay controls = ''>
           <source src={src} type="video/mp4" />
         </video>
       )}
-      {isImageVisible && (
-        <img
+      <img
           className={`video-${videoX}x`}
+          style={{height: "400px"}}
+          onLoad={setAutoHeight}
           src={`https://i.vimeocdn.com/video/${picId}_640x360.jpg`}
           alt="preview"
-        />
-      )}
+      />
       <VideoMetadata viewCount={metadata.views} downloads={metadata.downloads} likes={metadata.likes} commentCount={metadata.comments} />
       {isVideoLoading && <BiLoaderCircle className="loader-ic" />}
     </div>

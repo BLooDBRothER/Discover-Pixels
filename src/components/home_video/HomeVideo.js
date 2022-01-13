@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState, useRef, useCallback } from 'react';
 import { useMediaQuery } from 'react-responsive';
 import Dropdown from '../dropdown/Dropdown';
 import Videos from '../Video/Videos';
 import { data } from './samplevideo';
+import useVideoOrderQuery from './useVideoOrderQuery';
 
 const dropdownItems = [
     {
@@ -29,10 +30,11 @@ const HomeVideo = () => {
 
     const [isOpen, setIsOpen] = useState(false);
     const [dropdownValue, setDropdownValue] = useState("popular");
-    const [order, setOrder] = useState("");
+    const [order, setOrder] = useState("popular");
     const [pageNumber, setPageNumber] = useState(1);
 
-    const videoData = data;
+    const {videoData, hasMore} = useVideoOrderQuery(order, pageNumber);
+    // const videoData = data;
 
     return (
         <div className='home home-videos'>
@@ -46,7 +48,7 @@ const HomeVideo = () => {
              <Videos
               videoItems={videoData}
               containers={isLargeScreen ? 4 : isMediumScreen ? 3 : isSmallScreen ? 2 : 1}
-              />
+            />
         </div>
     )
 }
