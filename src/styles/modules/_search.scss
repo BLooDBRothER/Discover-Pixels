@@ -1,7 +1,8 @@
 .search{
     @include flexSetting(space-around, center, true);
-    min-height: 500px;
+    height: 500px;
     position: relative;
+    overflow: hidden;
 
     &-backdrop{
         background: url('../../Assets/searchBg-1.jpg');
@@ -10,9 +11,17 @@
         background-size: cover;
     }
 
+    &--backdrop-video{
+        width: 1920px;
+        position: absolute;
+        top: -50%;
+        left: 0;
+        // max-height: 500px;
+    }
+
     &::after{
         content: '';
-        background-color: rgba(0, 0, 0, 0.2);
+        background-color: rgba(0, 0, 0, 0.3);
         top: 0;
         left: 0;
         width: 100%;
@@ -23,6 +32,11 @@
     // & > *{
     //     z-index: 2;
     // }
+
+    &--video-title{
+        color: $secondary-color;
+        z-index: 2;
+    }
 
     &-form{
         @include flexSetting(flex-start, center);

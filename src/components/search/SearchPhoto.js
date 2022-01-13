@@ -1,5 +1,5 @@
 import React from 'react';
-import SearchBar from './SearchBar';
+import SearchBarPhoto from './SearchBarPhoto';
 import SearchFooter from './SearchFooter';
 
 const SearchPhoto = () => {
@@ -8,7 +8,7 @@ const SearchPhoto = () => {
     return (
         <div className='search search-backdrop'>
             <h1>Discover your Pixels Here !!!!</h1>
-            <SearchBar />
+            <SearchBarPhoto />
             <SearchFooter />
         </div>
     )
