@@ -12,14 +12,14 @@ const Images = ({imageItems, containers, lastImageRef}) => {
         for(let i=0; i<containers; i++){
             if(i === (containers-1)){
                 list.push((
-                    <div key={i} className='image-container'>
+                    <div key={i} className='media-container image-container'>
                         <Image imageItems={imageItems} indexPosition={i} imageX={containers}  lastImageRef={lastImageRef}/>
                     </div>
                 ));
             }
             else{
                 list.push((
-                    <div key={i} className='image-container'>
+                    <div key={i} className='media-container image-container'>
                         <Image imageItems={imageItems} indexPosition={i} imageX={containers} />
                     </div>
                 ));
@@ -29,7 +29,7 @@ const Images = ({imageItems, containers, lastImageRef}) => {
     }, [containers, imageItems, lastImageRef]);
 
     return (
-        <div ref={imageContainersRef} className='image-containers'>
+        <div ref={imageContainersRef} className='media-containers image-containers'>
             {containerList}
         </div>
     )

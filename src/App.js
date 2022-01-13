@@ -4,6 +4,7 @@ import Header from "./components/header/Header";
 import HomePhoto from "./components/home_photo/HomePhoto";
 import SearchPhoto from "./components/search/SearchPhoto";
 import SearchVideo from "./components/search/SearchVideo";
+import HomeVideo from "./components/home_video/HomeVideo";
 
 function App() {
   const [isNavbarVisible, setIsNavbarVisible] = useState(false);
@@ -20,7 +21,15 @@ function App() {
               </>
             }
           />
-          <Route path="video" element={<SearchVideo />} />
+          <Route
+            path="video"
+            element={
+              <>
+                <SearchVideo />
+                <HomeVideo />
+              </>
+            }
+          />
         </Route>
       </Routes>
       {/* <HomePhoto /> */}

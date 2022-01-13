@@ -30,3 +30,38 @@
     gap: 0 1rem;
     flex: 1;
 }
+
+.views-ic, .likes-ic, .downloads-ic, .comments-ic{
+    width: 40px;
+    height: 20px;
+}
+
+.views-ic{
+    color: violet;
+}
+.likes-ic{
+    color: red;
+}
+.downloads-ic{
+    color: yellow;
+}
+.comments-ic{
+    color: pink;
+}
+
+@keyframes flyFromTop {
+    0%{
+        top: -100%;
+    }
+    100%{
+        top: 0;
+    }
+}
+@keyframes flyFromBottom {
+    0%{
+        bottom: -100%;
+    }
+    100%{
+        bottom: 0;
+    }
+}

@@ -59,9 +59,9 @@ const HomePhoto = () => {
     }, [dropdownValue]);
 
     return (
-        <div className='home-photos'>
+        <div className='home home-photos'>
             <Dropdown 
-             classValue="home-photos-dropdown"
+             classValue="home-dropdown"
              setSelectedValue={setDropdownValue}
              isOpen={isOpen}
              setIsOpen={setIsOpen}
