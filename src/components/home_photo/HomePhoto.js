@@ -68,7 +68,6 @@ const HomePhoto = () => {
              items={dropdownItems}
              />
             <Images imageItems={imageData} containers={isLargeScreen ? 4 : isMediumScreen ? 3 : isSmallScreen ? 2 : 1} lastImageRef={lastImageRef} />
-            
         </div>
     )
 }
