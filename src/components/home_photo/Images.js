@@ -5,7 +5,6 @@ const Images = ({imageItems, containers, lastImageRef}) => {
     
     const imageContainersRef = useRef(null);
     const [containerList, setContainerList] = useState([]);
-    const [hasMore, setHasMore] = useState(true);
 
 
     useEffect(() => {

@@ -3,7 +3,6 @@ import { useMediaQuery } from 'react-responsive';
 import Dropdown from '../dropdown/Dropdown';
 import useImageOrderQuery from './useImageOrderQuery';
 import Images from './Images';
-import { imgData } from './samepleData.js'
 
 const dropdownItems = [
     {
@@ -30,7 +29,7 @@ const HomePhoto = () => {
 
     const [isOpen, setIsOpen] = useState(false);
     const [dropdownValue, setDropdownValue] = useState("popular");
-    const [order, setOrder] = useState("popular");
+    const [order, setOrder] = useState("");
     const [pageNumber, setPageNumber] = useState(1);
 
     const {imageData, hasMore} = useImageOrderQuery(order, pageNumber);
@@ -51,7 +50,8 @@ const HomePhoto = () => {
             rootMargin: "200px"
         });
         observer.current.observe(node);
-    }, [imageData]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
  
 
     useEffect(() => {
@@ -66,7 +66,6 @@ const HomePhoto = () => {
              isOpen={isOpen}
              setIsOpen={setIsOpen}
              items={dropdownItems}
-             setQuery
              />
             <Images imageItems={imageData} containers={isLargeScreen ? 4 : isMediumScreen ? 3 : isSmallScreen ? 2 : 1} lastImageRef={lastImageRef} />
             
