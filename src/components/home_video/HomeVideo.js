@@ -2,8 +2,9 @@ import React, { useEffect, useState, useRef, useCallback } from 'react';
 import { useMediaQuery } from 'react-responsive';
 import Dropdown from '../dropdown/Dropdown';
 import Videos from '../Video/Videos';
-import { data } from './samplevideo';
 import useVideoOrderQuery from './useVideoOrderQuery';
+
+export const lastVideoObjectContext = React.createContext(null);
 
 const dropdownItems = [
     {
@@ -38,6 +39,7 @@ const HomeVideo = () => {
 
     const observer = useRef();
     const lastVideoRef = useCallback((node) => {
+        console.log(node);
         if(!node) return;
         if(!hasMore) {observer.current?.disconnect(); return;}
         if(observer.current) observer.current.disconnect();
@@ -60,20 +62,21 @@ const HomeVideo = () => {
     }, [dropdownValue]);
 
     return (
-        <div className='home home-videos'>
-            <Dropdown 
-             classValue="home-dropdown"
-             setSelectedValue={setDropdownValue}
-             isOpen={isOpen}
-             setIsOpen={setIsOpen}
-             items={dropdownItems}
-             />
-             <Videos
-              videoItems={videoData}
-              containers={isLargeScreen ? 4 : isMediumScreen ? 3 : isSmallScreen ? 2 : 1}
-              lastVideoRef={lastVideoRef}
-            />
-        </div>
+        <lastVideoObjectContext.Provider value={lastVideoRef}>
+            <div className='home home-videos'>
+                <Dropdown 
+                classValue="home-dropdown"
+                setSelectedValue={setDropdownValue}
+                isOpen={isOpen}
+                setIsOpen={setIsOpen}
+                items={dropdownItems}
+                />
+                <Videos
+                videoItems={videoData}
+                containers={isLargeScreen ? 4 : isMediumScreen ? 3 : isSmallScreen ? 2 : 1}
+                />
+            </div>
+        </lastVideoObjectContext.Provider>
     )
 }
 

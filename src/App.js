@@ -30,8 +30,9 @@ function App() {
               </>
             }
           />
+          <Route path="search" />
+
         </Route>
-        {/* <Route path="search" /> */}
       </Routes>
     </BrowserRouter>
   );

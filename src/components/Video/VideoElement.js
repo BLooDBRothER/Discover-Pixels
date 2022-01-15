@@ -1,15 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { BiLoaderCircle } from 'react-icons/bi';
 import VideoAuthor from "./VideoAuthor";
 import VideoMetadata from "./VideoMetadata";
 
-const VideoElement = ({src, picId, videoX, author, metadata, lastVideoRef=null}) => {
+const VideoElement = ({src, picId, videoX, author, metadata, lastVideoRef}) => {
   const [isVideoVisible, setIsVideoVisible] = useState(false);
   const [isVideoLoading, setIsVideoLoading] = useState(false);
-
-  useEffect(() => {
-    console.log(lastVideoRef);
-  }, [lastVideoRef])
 
   const loadVideo = (e) => {
     setIsVideoVisible(true);

@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react';
 import Image from './Image';
 
-const Images = ({imageItems, containers, lastImageRef}) => {
+const Images = ({imageItems, containers}) => {
     
     const imageContainersRef = useRef(null);
     const [containerList, setContainerList] = useState([]);
@@ -10,23 +10,14 @@ const Images = ({imageItems, containers, lastImageRef}) => {
     useEffect(() => {
         let list = [];
         for(let i=0; i<containers; i++){
-            if(i === (containers-1)){
-                list.push((
-                    <div key={i} className='media-container image-container'>
-                        <Image imageItems={imageItems} indexPosition={i} imageX={containers}  lastImageRef={lastImageRef}/>
-                    </div>
-                ));
-            }
-            else{
-                list.push((
-                    <div key={i} className='media-container image-container'>
-                        <Image imageItems={imageItems} indexPosition={i} imageX={containers} />
-                    </div>
-                ));
-            }
+            list.push((
+                <div key={i} className='media-container image-container'>
+                    <Image imageItems={imageItems} indexPosition={i} imageX={containers} />
+                </div>
+            ));
         }
         setContainerList(list);
-    }, [containers, imageItems, lastImageRef]);
+    }, [containers, imageItems]);
 
     return (
         <div ref={imageContainersRef} className='media-containers image-containers'>

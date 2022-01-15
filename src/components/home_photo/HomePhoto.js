@@ -15,6 +15,8 @@ const dropdownItems = [
     }
 ]
 
+export const lastObjectContext = React.createContext(null);
+
 const HomePhoto = () => {
     // Media query
     const isLargeScreen = useMediaQuery({
@@ -29,7 +31,7 @@ const HomePhoto = () => {
 
     const [isOpen, setIsOpen] = useState(false);
     const [dropdownValue, setDropdownValue] = useState("popular");
-    const [order, setOrder] = useState("");
+    const [order, setOrder] = useState("popular");
     const [pageNumber, setPageNumber] = useState(1);
 
     const {imageData, hasMore} = useImageOrderQuery(order, pageNumber);
@@ -59,16 +61,18 @@ const HomePhoto = () => {
     }, [dropdownValue]);
 
     return (
-        <div className='home home-photos'>
-            <Dropdown 
-             classValue="home-dropdown"
-             setSelectedValue={setDropdownValue}
-             isOpen={isOpen}
-             setIsOpen={setIsOpen}
-             items={dropdownItems}
-             />
-            <Images imageItems={imageData} containers={isLargeScreen ? 4 : isMediumScreen ? 3 : isSmallScreen ? 2 : 1} lastImageRef={lastImageRef} />
-        </div>
+        <lastObjectContext.Provider value={lastImageRef}>
+            <div className='home home-photos'>
+                <Dropdown 
+                classValue="home-dropdown"
+                setSelectedValue={setDropdownValue}
+                isOpen={isOpen}
+                setIsOpen={setIsOpen}
+                items={dropdownItems}
+                />
+                <Images imageItems={imageData} containers={isLargeScreen ? 4 : isMediumScreen ? 3 : isSmallScreen ? 2 : 1} />
+            </div>
+        </lastObjectContext.Provider>
     )
 }
 
