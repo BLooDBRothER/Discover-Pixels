@@ -38,64 +38,34 @@
         z-index: 2;
     }
 
-    &-form{
-        @include flexSetting(flex-start, center);
+    & .home-search{
         width: 45%;
+
+        & .search-dropdown{
+            & .dropdown-title{            
+                color: $secondary-color;
+                background-color: rgba(0, 0, 0, 0.35);
+            }
+    
+            & .dropdown-lists{
+                background-color: rgba(0, 0, 0, 0.35);
+                color: $secondary-color;
+                border-color: $secondary-color;
+            }
+        }
     }
 
-    &-input{
-        @include flexSetting(flex-start, center);
-        flex: 1;
+    & .home-search .search-input{
         &-value, &-ic{
             background-color: rgba(255, 255, 255, 0.5);
-            z-index: 1;
-        }
-
-        &-value{
-            flex: 1;
-            font-size: 1.3rem;
-            border-radius: 25px 0 0 25px;
-            padding: .5rem 1rem;
-            border: none;
-            outline: none;
         }
 
         &-ic{
-            width: 40px;
-            height: 20px;
-            padding: 10px 0;
-            box-sizing: unset;
             fill: $dark-accent;
-            cursor: pointer;
-
-            &:hover{
-                filter: brightness(.8);
-            }
         }
     }
 
-    &-dropdown{
-        min-width: 160px;
-        height: 40px;
-        border-radius: 0 25px 25px 0;
-        & .dropdown-title{            
-            padding: .5rem 0 0.5rem 1rem;
-            color: $secondary-color;
-            background-color: rgba(0, 0, 0, 0.35);
-        }
 
-        & .dropdown-lists{
-            background-color: rgba(0, 0, 0, 0.35);
-            color: $secondary-color;
-            border-color: $secondary-color;
-            width: 160px;
-            border-radius: 0 0 25px 0;
-            overflow: hidden;
-            & > .dropdown-list{
-                padding: .5rem 0 .5rem 1rem;
-            }
-        }
-    }
 
     &-footer{
         @include flexSetting(space-between, center);

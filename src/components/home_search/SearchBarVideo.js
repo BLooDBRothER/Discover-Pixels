@@ -17,7 +17,7 @@ const dropDownItems = [
     },
 ]
 
-const SearchBarVideo = () => {
+const SearchBarVideo = ({classValue}) => {
     const [isOpen, setIsOpen] = useState(false);
     const [dropdownValue, setDropdownValue] = useState("All");
     const dropdownRef = useRef(null);
@@ -27,7 +27,7 @@ const SearchBarVideo = () => {
     }, [isOpen]);
 
     return (
-        <form className='search-form'>
+        <form className={`search-form ${classValue}`}>
             <div className='search-input'>
                 <input type="text" placeholder='Search Videos powered By pixabay' className='search-input-value'  />
                 <FaSearch className='search-input-ic'/>

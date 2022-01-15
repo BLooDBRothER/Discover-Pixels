@@ -5,6 +5,7 @@ import HomePhoto from "./components/home_photo/HomePhoto";
 import SearchPhoto from "./components/home_search/SearchPhoto";
 import SearchVideo from "./components/home_search/SearchVideo";
 import HomeVideo from "./components/home_video/HomeVideo";
+import SearchBar from "./components/search/SearchBar";
 
 function App() {
   const [isNavbarVisible, setIsNavbarVisible] = useState(false);
@@ -16,7 +17,7 @@ function App() {
             index
             element={
               <>
-                <SearchPhoto />
+                <SearchPhoto setIsNavbarVisible={setIsNavbarVisible} />
                 <HomePhoto />
               </>
             }
@@ -25,12 +26,15 @@ function App() {
             path="video"
             element={
               <>
-                <SearchVideo />
+                <SearchVideo setIsNavbarVisible={setIsNavbarVisible} />
                 <HomeVideo />
               </>
             }
           />
-          <Route path="search" />
+          <Route 
+           path="search" 
+           element={<SearchBar setIsNavbarVisible={setIsNavbarVisible} />} 
+          />
 
         </Route>
       </Routes>
