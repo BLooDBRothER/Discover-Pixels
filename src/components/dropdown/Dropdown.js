@@ -2,9 +2,10 @@ import React, { useState, useEffect, useRef } from 'react';
 import { FaCaretDown, FaCaretUp } from 'react-icons/fa';
 import DropdownList from './DropdownList';
 
-const Dropdown = ({classValue, setSelectedValue, isOpen, setIsOpen, items, dropdownRef=null, enableHoverEffect=false}) => {
+const Dropdown = ({classValue, setSelectedValue, items, enableHoverEffect=false}) => {
     
     const [selected, setSelected] = useState({});
+    const [isOpen, setIsOpen] = useState(false);
     const dropdownListRef = useRef(null);
     
     // handle outside click
@@ -30,10 +31,10 @@ const Dropdown = ({classValue, setSelectedValue, isOpen, setIsOpen, items, dropd
 
     return (
         <div 
-         className={`dropdown ${classValue}`}
+         className={`dropdown ${classValue} ${isOpen ? "active" : "inactive"}`}
          onMouseEnter={enableHoverEffect ? toggleDropdown.bind(null, true) : undefined}
          onMouseLeave={enableHoverEffect ? toggleDropdown.bind(null, false) : undefined}>
-            <h4 className='dropdown-title' onClick={toggleDropdown.bind(null, !isOpen)} ref={dropdownRef}>{selected.value}{isOpen ? <FaCaretUp className='dropdown-ic' /> : <FaCaretDown className='dropdown-ic' />}</h4>
+            <h4 className='dropdown-title' onClick={toggleDropdown.bind(null, !isOpen)}>{selected.value}{isOpen ? <FaCaretUp className='dropdown-ic' /> : <FaCaretDown className='dropdown-ic' />}</h4>
             {isOpen && (
                 <div className='dropdown-lists' ref={dropdownListRef}>
                     {items.map(item => (
