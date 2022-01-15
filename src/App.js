@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Header from "./components/header/Header";
 import HomePhoto from "./components/home_photo/HomePhoto";
-import SearchPhoto from "./components/search/SearchPhoto";
-import SearchVideo from "./components/search/SearchVideo";
+import SearchPhoto from "./components/home_search/SearchPhoto";
+import SearchVideo from "./components/home_search/SearchVideo";
 import HomeVideo from "./components/home_video/HomeVideo";
 
 function App() {
@@ -31,8 +31,8 @@ function App() {
             }
           />
         </Route>
+        {/* <Route path="search" /> */}
       </Routes>
-      {/* <HomePhoto /> */}
     </BrowserRouter>
   );
 }
