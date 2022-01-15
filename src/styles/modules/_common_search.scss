@@ -34,11 +34,15 @@
     &-dropdown{
         min-width: 160px;
         height: 40px;
-        border-radius: 0 25px 25px 0;
         & .dropdown-title{            
             padding: .5rem 0 0.5rem 1rem;
             color: $secondary-color;
+            border-radius: 0 25px 25px 0;
             background-color: rgba(0, 0, 0, 0.35);
+        }
+
+        &.active .dropdown-title{
+            border-radius: 0 25px 0 0;
         }
 
         & .dropdown-lists{

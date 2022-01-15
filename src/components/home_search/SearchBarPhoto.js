@@ -21,28 +21,26 @@ const dropDownItems = [
     },
 ]
 
-const SearchBarPhoto = ({classValue}) => {
-    const [isOpen, setIsOpen] = useState(false);
+const SearchBarPhoto = ({classValue, searchBarValue, setSearchBarValue}) => {
     const [dropdownValue, setDropdownValue] = useState("All");
-    const dropdownRef = useRef(null);
 
-    useEffect(() => {
-        dropdownRef.current.style.borderRadius = isOpen ? "0px 25px 0px 0px" : "0px 25px 25px 0";
-    }, [isOpen]);
+    const triggerSearch = (e) => {
+        console.log(e);
+        if((e._reactName === "onKeyPress" && e.code !== "Enter") || searchBarValue === "") return;
+        e.preventDefault();
+        window.location = `/search/image/${searchBarValue}`;
+    }
 
     return (
         <form className={`search-form ${classValue}`}>
             <div className='search-input'>
-                <input type="text" placeholder='Search Images powered By pixabay' className='search-input-value'  />
-                <FaSearch className='search-input-ic'/>
+                <input type="text" placeholder='Search Images powered By pixabay' value={searchBarValue} onChange={(e) => {setSearchBarValue(e.target.value)}} className='search-input-value' onKeyPress={triggerSearch} />
+                <FaSearch className='search-input-ic' onClick={triggerSearch}/>
             </div>
             <Dropdown
              classValue="search-dropdown"
              setSelectedValue={setDropdownValue}
-             isOpen={isOpen}
-             setIsOpen={setIsOpen}
              items={dropDownItems}
-             dropdownRef={dropdownRef}
              enableHoverEffect={true}
             />
         </form>

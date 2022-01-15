@@ -29,7 +29,7 @@ const HomePhoto = () => {
         query: "(min-width: 880px)"
     });
 
-    const [isOpen, setIsOpen] = useState(false);
+    // const [isOpen, setIsOpen] = useState(false);
     const [dropdownValue, setDropdownValue] = useState("popular");
     const [order, setOrder] = useState("popular");
     const [pageNumber, setPageNumber] = useState(1);
@@ -66,8 +66,6 @@ const HomePhoto = () => {
                 <Dropdown 
                 classValue="home-dropdown"
                 setSelectedValue={setDropdownValue}
-                isOpen={isOpen}
-                setIsOpen={setIsOpen}
                 items={dropdownItems}
                 />
                 <Images imageItems={imageData} containers={isLargeScreen ? 4 : isMediumScreen ? 3 : isSmallScreen ? 2 : 1} />

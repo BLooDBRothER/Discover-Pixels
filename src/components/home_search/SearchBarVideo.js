@@ -18,13 +18,7 @@ const dropDownItems = [
 ]
 
 const SearchBarVideo = ({classValue}) => {
-    const [isOpen, setIsOpen] = useState(false);
     const [dropdownValue, setDropdownValue] = useState("All");
-    const dropdownRef = useRef(null);
-
-    useEffect(() => {
-        dropdownRef.current.style.borderRadius = isOpen ? "0px 25px 0px 0px" : "0px 25px 25px 0";
-    }, [isOpen]);
 
     return (
         <form className={`search-form ${classValue}`}>
@@ -35,10 +29,7 @@ const SearchBarVideo = ({classValue}) => {
             <Dropdown
              classValue="search-dropdown"
              setSelectedValue={setDropdownValue}
-             isOpen={isOpen}
-             setIsOpen={setIsOpen}
              items={dropDownItems}
-             dropdownRef={dropdownRef}
              enableHoverEffect={true}
             />
         </form>
