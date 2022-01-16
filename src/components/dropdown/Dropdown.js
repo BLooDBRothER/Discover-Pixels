@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { FaCaretDown, FaCaretUp } from 'react-icons/fa';
 import DropdownList from './DropdownList';
 
-const Dropdown = ({classValue, setSelectedValue, items, enableHoverEffect=false}) => {
+const Dropdown = ({classValue, setSelectedValue, defaultVaueId=0, items, enableHoverEffect=false}) => {
     
     const [selected, setSelected] = useState({});
     const [isOpen, setIsOpen] = useState(false);
@@ -21,7 +21,9 @@ const Dropdown = ({classValue, setSelectedValue, items, enableHoverEffect=false}
     });
 
     useEffect(() => {
-        setSelected(items[0]);
+        console.log("Hell",defaultVaueId);
+        setSelected(items[defaultVaueId]);
+        // setSelected(items[0]);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
