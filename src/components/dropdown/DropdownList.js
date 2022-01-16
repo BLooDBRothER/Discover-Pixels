@@ -1,11 +1,20 @@
-import React from "react";
+import React, { useContext } from "react";
+import { QueryChangeContext } from "../search/SearchBar";
+import { FilterChangeContext } from "../search/SearchPage";
 
 const DropdownList = ({item, selected, setSelcted, setIsOpen, setSelectedValue}) => {
+
+    const localQueryChangeContext = useContext(FilterChangeContext);
+    const localKeyValueContext = useContext(QueryChangeContext)
+
     const handleSelection = () => {
         if(selected.id === item.id) return;
-        setSelectedValue(item.value.toLowerCase());
+        const selectedValue = item.value.toLowerCase();
+        setSelectedValue(selectedValue);
         setSelcted(item);
         setIsOpen(false);
+        if(!localQueryChangeContext || !localKeyValueContext) return;
+        localQueryChangeContext(localKeyValueContext.key, selectedValue, localKeyValueContext.default);
     }
 
     return (
