@@ -6,7 +6,9 @@ import SearchBarPhoto from '../home_search/SearchBarPhoto';
 import CheckBox from './CheckBox';
 import { categoryDropdownItems, imageTypeDropdownItems, orderDropdownItems, orientationDropdownItems } from './dropdown_items';
 
-function getSearchParamsId(entries){
+export const QueryChangeContext = React.createContext(null);
+
+function getSearchParamsId(entries){    
     let imgId=0, orienId=0, cateId=0, ordId=0;
     for(const entry of entries){
         switch(entry[0]){
@@ -36,26 +38,56 @@ const SearchBar = ({
     setCategory,
     setOrder
     }) => {
+        
+    const paramsKeyValue = {
+        image_type: {
+            key: "image_type",
+            default: "images"
+        },
+        orientation: {
+            key: "orientation",
+            default: "orientation"
+        },
+        category: {
+            key: "category",
+            default: "category"
+        },
+        order: {
+            key: "order",
+            default: "popular"
+        }
+    }
     let params = useParams();
-    const [searchParams, setSearchParams] = useSearchParams();
-    let [imageTypeId, oreintationId, categoryId, orderId] = getSearchParamsId(searchParams.entries());
+    const [searchParams] = useSearchParams();
+    const [imageTypeId, setImageTypeId] = useState(0);
+    const [oreintationId, setOreintationId] = useState(0);
+    const [categoryId, setCategoryId] = useState(0);
+    const [orderId, setOrderId] = useState(0);
     
     const [searchBarValue, setSearchBarValue] = useState(params.searchKey);
 
     const updateLocalStorage = () => {
-        console.log(isEditorChoiceEnabled, isSafeSearchEnabled)
         localStorage.setItem("safeSearch", isSafeSearchEnabled);
         localStorage.setItem("editorChoice", isEditorChoiceEnabled);
     }
 
+    // useEffect(() => {
+    //     console.log("effe", imageTypeId, oreintationId, categoryId, orderId)
+    // }, [imageTypeId, oreintationId, categoryId, orderId]);
+
     useEffect(() => {
-        console.log(params);
+        // console.log(params);
+        const [imageTypeId, oreintationId, categoryId, orderId] = getSearchParamsId(searchParams.entries());
+        setImageTypeId(imageTypeId);
+        setOreintationId(oreintationId);
+        setCategoryId(categoryId);
+        setOrderId(orderId);
+        // console.log(imageTypeId, oreintationId, categoryId, orderId)
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [searchParams]);
 
     useEffect(() => {
         updateLocalStorage();
-        console.log(imageTypeId, oreintationId, categoryId, orderId);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isSafeSearchEnabled, isEditorChoiceEnabled]);
 
@@ -69,30 +101,38 @@ const SearchBar = ({
                 </div>
             </div>
             <div className='search-result-2'>
-                <Dropdown 
-                    classValue="search-result-dropdown"
-                    setSelectedValue={setImageType}
-                    defaultVaueId={imageTypeId}
-                    items={imageTypeDropdownItems}
-                />
-                <Dropdown 
-                    classValue="search-result-dropdown"
-                    setSelectedValue={setOrientation}
-                    defaultVaueId={oreintationId}
-                    items={orientationDropdownItems}
-                />
-                <Dropdown 
-                    classValue="search-result-dropdown"
-                    setSelectedValue={setCategory}
-                    defaultVaueId={categoryId}
-                    items={categoryDropdownItems}
-                />
-                <Dropdown 
-                    classValue="search-result-dropdown"
-                    setSelectedValue={setOrder}
-                    defaultVaueId={orderId}
-                    items={orderDropdownItems}
-                />
+                <QueryChangeContext.Provider value={paramsKeyValue.image_type}>
+                    <Dropdown 
+                        classValue="search-result-dropdown"
+                        setSelectedValue={setImageType}
+                        defaultVaueId={imageTypeId}
+                        items={imageTypeDropdownItems}
+                    />
+                </QueryChangeContext.Provider>
+                <QueryChangeContext.Provider value={paramsKeyValue.orientation}>
+                    <Dropdown 
+                        classValue="search-result-dropdown"
+                        setSelectedValue={setOrientation}
+                        defaultVaueId={oreintationId}
+                        items={orientationDropdownItems}
+                    />
+                </QueryChangeContext.Provider>
+                <QueryChangeContext.Provider value={paramsKeyValue.category}>
+                    <Dropdown 
+                        classValue="search-result-dropdown"
+                        setSelectedValue={setCategory}
+                        defaultVaueId={categoryId}
+                        items={categoryDropdownItems}
+                    />
+                </QueryChangeContext.Provider>
+                <QueryChangeContext.Provider value={paramsKeyValue.order}>
+                    <Dropdown 
+                        classValue="search-result-dropdown"
+                        setSelectedValue={setOrder}
+                        defaultVaueId={orderId}
+                        items={orderDropdownItems}
+                    />
+                </QueryChangeContext.Provider>
             </div>
         </div>
     )

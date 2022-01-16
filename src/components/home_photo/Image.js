@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 import React from 'react';
 import { useLastObjectContext } from '../last_intersection_observer/LastObjectContext';
 import ImageAuthordata from './ImageAuthordata';

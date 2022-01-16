@@ -5,7 +5,6 @@ const useImageGet = (q, image_type, order, orientation, category, safesearch=fal
     const [imageData, setImageData] = useState([]);
     const [hasMore, setHasMore] = useState(true);
     const per_page = 20;
-    let cancel;
 
     if(image_type === "images"){
         image_type = "all"
@@ -26,7 +25,6 @@ const useImageGet = (q, image_type, order, orientation, category, safesearch=fal
             method: "GET",
             url: "https://pixabay.com/api/",
             params: {key: process.env.REACT_APP_PIXABAY_KEY, q, image_type, order, orientation, category, safesearch,  page: pageNumber, per_page, editors_choice},
-            cancelToken: new axios.CancelToken(c => cancel = c)
         }).then(res => {
             console.log(res.data);
             if((pageNumber*per_page) >= res.data.totalHits){
@@ -36,8 +34,7 @@ const useImageGet = (q, image_type, order, orientation, category, safesearch=fal
         }).catch(e => {
             console.log(e);
         })
-        return () => cancel();
-    }, [image_type, order, orientation, category, safesearch, editors_choice, pageNumber]);
+    }, [q, image_type, order, orientation, category, safesearch, editors_choice, pageNumber]);
     return {imageData, hasMore};
 }
 

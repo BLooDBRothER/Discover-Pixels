@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useMediaQuery } from 'react-responsive';
 import { useParams, useSearchParams } from 'react-router-dom';
 import useImageGet from '../custom_hooks/useImageGet';
 import Images from '../home_photo/Images';
 import LastObjectContext from '../last_intersection_observer/LastObjectContext';
 import SearchBar from './SearchBar';
+
+export const FilterChangeContext = React.createContext(null);
 
 const SearchPage = ({setIsNavbarVisible}) => {
     // Media query
@@ -36,49 +38,58 @@ const SearchPage = ({setIsNavbarVisible}) => {
 
     let {imageData, hasMore} = useImageGet(query, imageType, order, orientation, category, isSafeSearchEnabled, isEditorChoiceEnabled, pageNumber);
 
+    const handleFilterChange = (key, value, defaultValue) => {
+        let queryParams = {}
+        if(value !== defaultValue){
+            queryParams[key] = value;
+        }
+        for(const entry of searchParams.entries()){
+            if(entry[0] === key) continue;
+            queryParams[entry[0]] = entry[1];
+        }
+        setSearchParams(queryParams);
+    }
+
+    useEffect(() => {
+        setQuery(params.searchKey);
+    }, [params]);
+
     useEffect(() => {
         setIsNavbarVisible(true);
-        console.log(params, searchParams, searchParams.get("imag_type"));
-        for(let entry of searchParams.entries()){
-            console.log(entry);
-        }
+        // console.log(params, searchParams, searchParams.get("imag_type"));
+        // for(let entry of searchParams.entries()){
+        //     console.log(entry);
+        // }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
+    // useEffect(() => {console.log("chg", imageType)}, [imageType]);
+    // useEffect(() => {console.log("chg", orientation)}, [orientation]);
+    // useEffect(() => {console.log("chg", category)}, [category]);
+    // useEffect(() => {console.log("chg", order)}, [order]);
+
     useEffect(() => {
-        const searchParamsObject = {};
-        if(imageType !== "images"){
-            searchParamsObject.image_type = imageType
-        }
-        if(orientation !== "orientation"){
-            console.log("he", orientation);
-            searchParamsObject.orientation = orientation;
-        }
-        if(category !== "category"){
-            searchParamsObject.category = category;
-        }
-        if(order === "latest") searchParamsObject.order = "latest";
-        console.log(searchParamsObject);
-        for(const entry of searchParams.entries()){
-            if(!searchParamsObject[entry[0]]) continue;
-            searchParamsObject[entry[0]] = entry[1]
-        }
-        setSearchParams(searchParamsObject);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [imageType, orientation, category, order]);
+        // console.log(searchParams);
+        searchParams.has("image_type") ? setImageType(searchParams.get("image_type")) : setImageType("images");
+        searchParams.has("orientation") ? setOrientation(searchParams.get("orientation")) : setOrientation("orientation");
+        searchParams.has("category") ? setCategory(searchParams.get("category")) : setCategory("category");
+        searchParams.has("order") ? setOrder(searchParams.get("order")) : setOrder("popular");
+    }, [searchParams]);
 
     return (
         <>
-            <SearchBar 
-                isSafeSearchEnabled={isSafeSearchEnabled}
-                setIsSafeSearchEnabled={setIsSafeSearchEnabled}
-                isEditorChoiceEnabled={isEditorChoiceEnabled}
-                setIsEditorChoiceEnabled={setIsEditorChoiceEnabled}
-                setImageType={setImageType}
-                setOrientation={setOrientation}
-                setCategory={setCategory}
-                setOrder={setOrder}
-            />
+            <FilterChangeContext.Provider value={handleFilterChange}>
+                <SearchBar 
+                    isSafeSearchEnabled={isSafeSearchEnabled}
+                    setIsSafeSearchEnabled={setIsSafeSearchEnabled}
+                    isEditorChoiceEnabled={isEditorChoiceEnabled}
+                    setIsEditorChoiceEnabled={setIsEditorChoiceEnabled}
+                    setImageType={setImageType}
+                    setOrientation={setOrientation}
+                    setCategory={setCategory}
+                    setOrder={setOrder}
+                />
+            </FilterChangeContext.Provider>
             <LastObjectContext hasMore={hasMore} setPageNumber={setPageNumber} >
             <div className='gallery gallery-photos'>
                 <Images imageItems={imageData} containers={isLargeScreen ? 4 : isMediumScreen ? 3 : isSmallScreen ? 2 : 1} />
