@@ -5,7 +5,7 @@ import HomePhoto from "./components/home_photo/HomePhoto";
 import SearchPhoto from "./components/home_search/SearchPhoto";
 import SearchVideo from "./components/home_search/SearchVideo";
 import HomeVideo from "./components/home_video/HomeVideo";
-import SearchBar from "./components/search/SearchBar";
+import SearchPage from "./components/search/SearchPage";
 
 function App() {
   const [isNavbarVisible, setIsNavbarVisible] = useState(false);
@@ -32,9 +32,9 @@ function App() {
             }
           />
           <Route 
-           path="search" 
-           element={<SearchBar setIsNavbarVisible={setIsNavbarVisible} />} 
-          />
+           path="search" >
+             <Route path="image/:searchKey" element={<SearchPage setIsNavbarVisible={setIsNavbarVisible} />} />
+           </Route>
 
         </Route>
       </Routes>

@@ -17,6 +17,7 @@
         left: 0;
         font-size: 1.3em;
         z-index: 5;
+        animation: scaleIn .2s ease;
 
         & > .dropdown-list{
             cursor: pointer;
@@ -31,5 +32,20 @@
         background-color: $dark-accent;
         color: white;
         font-weight: bold;
+    }
+}
+
+@keyframes scaleIn {
+    0%{
+        transform: scale(0);
+        opacity: 0;
+    }
+    50%{
+        transform: scale(1.01);
+        opacity: 0.7;
+    }
+    100%{
+        transform: scale(1);
+        opacity: 1;
     }
 }

@@ -1,7 +1,44 @@
 .search-result{
-    @include flexSetting(space-between, center);
     padding: 1rem;
     border-top: 1px solid $secondary-color;
+    border-Bottom: 1px solid $secondary-color;
+
+    &-1{
+        @include flexSetting(space-between, center);
+        margin: 1rem 0;
+    }
+
+    &-2{
+        @include flexSetting(flex-end, center);
+        margin: 1.5rem 0;
+    }
+
+    &-1 &-dropdown{
+        z-index: 2;
+    }
+
+    &-dropdown{
+        border-radius: 20px;
+        width: 160px;
+        background-color: $secondary-color;
+        margin:  0 2rem;
+        &.active{
+            border-radius: 20px 20px 0 0;
+        }
+
+        & .dropdown-lists{
+            background-color: $secondary-color;
+            border-radius: 0 0 20px 20px;
+            overflow: hidden;
+            width: 160px;
+        }
+        & .dropdown-title{
+            padding: 0.3rem 0.5rem 0.3rem 1rem;
+        }
+        & .dropdown-list{
+            padding: 0.5rem 1rem;
+        }
+    }
 
     &-bar{
         width: 50%;

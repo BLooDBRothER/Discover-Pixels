@@ -37,7 +37,6 @@ const HomePhoto = () => {
 
     const {imageData, hasMore} = useImageOrderQuery(order, pageNumber);
     // const imageData = imgData;
- 
 
     useEffect(() => {
         setOrder(dropdownValue.toLowerCase());
@@ -45,9 +44,9 @@ const HomePhoto = () => {
 
     return (
         <LastObjectContext hasMore={hasMore} setPageNumber={setPageNumber} >
-            <div className='home home-photos'>
+            <div className='gallery gallery-photos'>
                 <Dropdown 
-                classValue="home-dropdown"
+                classValue="gallery-dropdown"
                 setSelectedValue={setDropdownValue}
                 items={dropdownItems}
                 />

@@ -21,9 +21,6 @@ const Image = ({imageItems, indexPosition, imageX, lastImageRef=null}) => {
                                 <ImageMetadata viewCount={item.views} downloads={item.downloads} likes={item.likes} commentCount={item.comments} />
                             </div>)
                 }
-                else{
-                    return <div key={index}></div>;
-                }
             })}
         </>
     )
