@@ -1,8 +1,10 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useMediaQuery } from 'react-responsive';
 import Dropdown from '../dropdown/Dropdown';
 import useImageOrderQuery from './useImageOrderQuery';
 import Images from './Images';
+import LastObjectContext from '../last_intersection_observer/LastObjectContext';
+
 
 const dropdownItems = [
     {
@@ -15,7 +17,6 @@ const dropdownItems = [
     }
 ]
 
-export const lastObjectContext = React.createContext(null);
 
 const HomePhoto = () => {
     // Media query
@@ -36,24 +37,6 @@ const HomePhoto = () => {
 
     const {imageData, hasMore} = useImageOrderQuery(order, pageNumber);
     // const imageData = imgData;
-
-    const observer = useRef();
-    const lastImageRef = useCallback((node) => {
-        if(!node) return;
-        if(!hasMore) {observer.current?.disconnect(); return;}
-        if(observer.current) observer.current.disconnect();
-        observer.current = new IntersectionObserver(entries => {
-            if(entries[0].isIntersecting){
-                setPageNumber(prevPage => prevPage+1);
-                observer.current.disconnect();
-            }
-        },{
-            threshold: 1,
-            rootMargin: "200px"
-        });
-        observer.current.observe(node);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
  
 
     useEffect(() => {
@@ -61,7 +44,7 @@ const HomePhoto = () => {
     }, [dropdownValue]);
 
     return (
-        <lastObjectContext.Provider value={lastImageRef}>
+        <LastObjectContext hasMore={hasMore} setPageNumber={setPageNumber} >
             <div className='home home-photos'>
                 <Dropdown 
                 classValue="home-dropdown"
@@ -70,7 +53,8 @@ const HomePhoto = () => {
                 />
                 <Images imageItems={imageData} containers={isLargeScreen ? 4 : isMediumScreen ? 3 : isSmallScreen ? 2 : 1} />
             </div>
-        </lastObjectContext.Provider>
+        </LastObjectContext>
+        
     )
 }
 

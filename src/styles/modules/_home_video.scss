@@ -1,7 +1,6 @@
 .video-containers {
     & .video-container {
         @include flexSetting(flex-start, flex-start, true);
-        gap: 1.4rem 0;
 
         & .video-element{
             position: absolute;
@@ -15,6 +14,7 @@
             display: block;
             position: relative;
             overflow: hidden;
+            margin-bottom: 1.4rem;
 
             & video, & img{
                 background-color: $img-background;

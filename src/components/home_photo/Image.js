@@ -1,10 +1,10 @@
-import React, { useContext } from 'react';
-import { lastObjectContext } from './HomePhoto';
+import React from 'react';
+import { useLastObjectContext } from '../last_intersection_observer/LastObjectContext';
 import ImageAuthordata from './ImageAuthordata';
 import ImageMetadata from './ImageMetadata';
 
 const Image = ({imageItems, indexPosition, imageX, lastImageRef=null}) => {
-    const lastContextData = useContext(lastObjectContext);
+    const lastContextData =  useLastObjectContext();
     const handleAfterLoad = (e) => {
         e.target.style.height = "auto";
     }

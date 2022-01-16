@@ -1,13 +1,12 @@
 .image-containers{
     & .image-container{
         @include flexSetting(flex-start, flex-start, true);
-        gap: 1.4rem 0;
 
         & .image{
             display: block;
             position: relative;
             overflow: hidden;
-
+            margin-bottom: 1.4rem;
             & img{
                 background-color: $img-background;
             }

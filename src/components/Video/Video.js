@@ -1,9 +1,9 @@
-import React, { useContext } from "react";
-import { lastVideoObjectContext } from "../home_video/HomeVideo";
+import React from "react";
+import { useLastObjectContext } from "../last_intersection_observer/LastObjectContext";
 import VideoElement from "./VideoElement";
 
-const Video = ({ videoItems, indexPosition, videoX, lastVideoRef = null }) => {
-  const lastContextData = useContext(lastVideoObjectContext);
+const Video = ({ videoItems, indexPosition, videoX}) => {
+  const lastContextData = useLastObjectContext();
   const isLastVideoObject = (index) => {
     return (indexPosition === videoX - 1 && index + videoX >= videoItems.length) ? true : false;
   }
