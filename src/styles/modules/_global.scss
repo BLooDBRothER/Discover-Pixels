@@ -1,8 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap');
+/* colors */
 $primary-color: #080614;
 $secondary-color: #FFFDFD;
 $dark-accent: #3647DE;
 $light-accent: #41EAD4;
 $img-background: #1C1C20;
+
+/* fonts */
+$heading-font: 'Raleway', sans-serif;
 
 /* size */
 $header-height: 100px;
@@ -15,6 +20,7 @@ $header-height: 100px;
 body,html{
   height: 100vh;
   background-color: $primary-color;
+  font-family: $heading-font;
 }
 
 a{
