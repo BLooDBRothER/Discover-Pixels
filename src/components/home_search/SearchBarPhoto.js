@@ -1,6 +1,6 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { FaSearch } from 'react-icons/fa';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams, useParams } from 'react-router-dom';
 import Dropdown from '../dropdown/Dropdown';
 
 const dropDownItems = [
@@ -25,6 +25,7 @@ const dropDownItems = [
 const SearchBarPhoto = ({classValue, searchBarValue, setSearchBarValue}) => {
     const [dropdownValue, setDropdownValue] = useState("All");
     const [searchParams] = useSearchParams();
+    const params = useParams();
     const navigate = useNavigate();
 
     const returnSearchParams = () => {
@@ -40,7 +41,7 @@ const SearchBarPhoto = ({classValue, searchBarValue, setSearchBarValue}) => {
     const triggerSearch = (e) => {
         if((e._reactName === "onKeyPress" && e.code !== "Enter") || searchBarValue === "") return;
         e.preventDefault();
-        console.log(returnSearchParams());
+        if(params.searchKey === searchBarValue) return;
         const getSearchParams = returnSearchParams();
         const searchParamsString = getSearchParams === "" ? "" : `?${getSearchParams}`;
         navigate(`/search/image/${searchBarValue}${searchParamsString}`);

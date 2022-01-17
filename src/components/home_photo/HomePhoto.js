@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useMediaQuery } from 'react-responsive';
+import ReactLoading from 'react-loading';
 import Dropdown from '../dropdown/Dropdown';
 import useImageOrderQuery from './useImageOrderQuery';
 import Images from './Images';
@@ -37,6 +38,7 @@ const HomePhoto = () => {
 
     const {imageData, hasMore} = useImageOrderQuery(order, pageNumber);
     // const imageData = imgData;
+    console.log(imageData, hasMore);
 
     useEffect(() => {
         setOrder(dropdownValue.toLowerCase());
@@ -50,7 +52,8 @@ const HomePhoto = () => {
                 setSelectedValue={setDropdownValue}
                 items={dropdownItems}
                 />
-                <Images imageItems={imageData} containers={isLargeScreen ? 4 : isMediumScreen ? 3 : isSmallScreen ? 2 : 1} />
+                {(imageData && <Images imageItems={imageData} containers={isLargeScreen ? 4 : isMediumScreen ? 3 : isSmallScreen ? 2 : 1} />)}
+                <ReactLoading type="bars" style={{margin: "0 auto", height: "100px", width: "100px", fill: "white"}}/>
             </div>
         </LastObjectContext>
         

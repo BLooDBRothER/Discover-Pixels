@@ -1,6 +1,7 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useMediaQuery } from 'react-responsive';
 import { useParams, useSearchParams } from 'react-router-dom';
+import ReactLoading from 'react-loading';
 import useImageGet from '../custom_hooks/useImageGet';
 import Images from '../home_photo/Images';
 import LastObjectContext from '../last_intersection_observer/LastObjectContext';
@@ -56,20 +57,10 @@ const SearchPage = ({setIsNavbarVisible}) => {
 
     useEffect(() => {
         setIsNavbarVisible(true);
-        // console.log(params, searchParams, searchParams.get("imag_type"));
-        // for(let entry of searchParams.entries()){
-        //     console.log(entry);
-        // }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    // useEffect(() => {console.log("chg", imageType)}, [imageType]);
-    // useEffect(() => {console.log("chg", orientation)}, [orientation]);
-    // useEffect(() => {console.log("chg", category)}, [category]);
-    // useEffect(() => {console.log("chg", order)}, [order]);
-
     useEffect(() => {
-        // console.log(searchParams);
         searchParams.has("image_type") ? setImageType(searchParams.get("image_type")) : setImageType("images");
         searchParams.has("orientation") ? setOrientation(searchParams.get("orientation")) : setOrientation("orientation");
         searchParams.has("category") ? setCategory(searchParams.get("category")) : setCategory("category");
@@ -91,9 +82,10 @@ const SearchPage = ({setIsNavbarVisible}) => {
                 />
             </FilterChangeContext.Provider>
             <LastObjectContext hasMore={hasMore} setPageNumber={setPageNumber} >
-            <div className='gallery gallery-photos'>
+            {(imageData && <div className='gallery gallery-photos'>
                 <Images imageItems={imageData} containers={isLargeScreen ? 4 : isMediumScreen ? 3 : isSmallScreen ? 2 : 1} />
-            </div>
+            </div>)}
+            <ReactLoading type="bars" style={{margin: "0 auto", height: "100px", width: "100px", fill: "white"}}/>
         </LastObjectContext>
         </>
     )

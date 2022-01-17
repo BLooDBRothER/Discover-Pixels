@@ -71,9 +71,9 @@ const SearchBar = ({
         localStorage.setItem("editorChoice", isEditorChoiceEnabled);
     }
 
-    // useEffect(() => {
-    //     console.log("effe", imageTypeId, oreintationId, categoryId, orderId)
-    // }, [imageTypeId, oreintationId, categoryId, orderId]);
+    useEffect(() => {
+        setSearchBarValue(params.searchKey);
+    }, [params]);
 
     useEffect(() => {
         // console.log(params);
