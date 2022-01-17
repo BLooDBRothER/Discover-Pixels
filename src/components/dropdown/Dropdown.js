@@ -21,9 +21,7 @@ const Dropdown = ({classValue, setSelectedValue, defaultVaueId=0, items, enableH
     });
 
     useEffect(() => {
-        // console.log("Hell",defaultVaueId);
         setSelected(items[defaultVaueId]);
-        // setSelected(items[0]);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [defaultVaueId]);
 
@@ -36,7 +34,10 @@ const Dropdown = ({classValue, setSelectedValue, defaultVaueId=0, items, enableH
          className={`dropdown ${classValue} ${isOpen ? "active" : "inactive"}`}
          onMouseEnter={enableHoverEffect ? toggleDropdown.bind(null, true) : undefined}
          onMouseLeave={enableHoverEffect ? toggleDropdown.bind(null, false) : undefined}>
-            <h4 className='dropdown-title' onClick={toggleDropdown.bind(null, !isOpen)}>{selected.value}{isOpen ? <FaCaretUp className='dropdown-ic' /> : <FaCaretDown className='dropdown-ic' />}</h4>
+            <div className='dropdown-title' onClick={toggleDropdown.bind(null, !isOpen)}>
+                <h4 className='dropdown-title-value'>{selected.value}</h4>
+                {isOpen ? <FaCaretUp className='dropdown-ic' /> : <FaCaretDown className='dropdown-ic' />}
+            </div>
             {isOpen && (
                 <div className='dropdown-lists' ref={dropdownListRef}>
                     {items.map(item => (

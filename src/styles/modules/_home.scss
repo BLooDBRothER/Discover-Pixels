@@ -11,7 +11,7 @@
         border-radius: 10px 10px 0 0;
     }
     &-dropdown .dropdown-title{
-        padding: .2rem 0 .2rem 1rem;
+        padding: .2rem 0 .2rem .5rem;
     }
     &-dropdown .dropdown-lists{
         border-radius: 0 0 10px 10px;
@@ -20,6 +20,15 @@
     &-dropdown .dropdown-list{
         padding: .5rem;
     }
+}
+
+.search-form .dropdown-selected-ic{
+    fill: $secondary-color;
+    margin: 0 .2rem;
+}
+
+.search-form .dropdown{
+    z-index: 6;
 }
 
 .media-containers{

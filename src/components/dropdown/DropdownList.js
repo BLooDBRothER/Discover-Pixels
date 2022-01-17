@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { TiTick } from "react-icons/ti";
 import { FilterChangeContext, QueryChangeContext } from "../../App";
 
 const DropdownList = ({item, selected, setSelcted, setIsOpen, setSelectedValue}) => {
@@ -22,7 +23,8 @@ const DropdownList = ({item, selected, setSelcted, setIsOpen, setSelectedValue})
          className={`dropdown-list ${selected.id === item.id ? "dropdown-selected" : ""}`}
          onClick={handleSelection}
         >
-            {item.value}
+            <div className="dropdown-list-value">{item.value}</div>
+            {(selected.id === item.id) && <TiTick className="dropdown-selected-ic"/>}
         </div>
     );
 };

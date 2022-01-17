@@ -6,9 +6,17 @@
     &-title{
         @include flexSetting(space-between, center);
         font-size: 1.3rem;
+        width: 100%;
+    }
+    &-title-value{
+        width: calc(100% - 20px);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
     &-ic{
-        margin-right: 1rem;
+        width: 20px;
+        margin: 0 .5rem;
     }
     &-lists{
         border-top: 1px solid $primary-color;
@@ -16,7 +24,7 @@
         top: 100%;
         left: 0;
         font-size: 1.3em;
-        z-index: 5;
+        z-index: 10;
         animation: scaleIn .2s ease;
 
         & > .dropdown-list{
@@ -29,9 +37,25 @@
 
     }
     &-selected{
-        background-color: $dark-accent;
-        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
         font-weight: bold;
+        
+
+        & .dropdown-list-value{
+            width: calc(100% - 25px);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        &-ic{
+            width: 20px;
+            box-sizing: unset;
+            fill: black;
+            margin-left: 0.2rem;
+        }
     }
 }
 
