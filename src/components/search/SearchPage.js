@@ -25,7 +25,7 @@ const SearchPage = ({setIsNavbarVisible}) => {
     const [searchParams, setSearchParams] = useSearchParams();
 
     // params variable
-    const safeSearchLocalStorage = localStorage.getItem("safeSearch") === "true" ? true : false;
+    const safeSearchLocalStorage = localStorage.getItem("safeSearch") === "false" ? false : true;
     const editorChoiceLocalStorage = localStorage.getItem("editorChoice") === "true" ? true : false;
 
     const [isSafeSearchEnabled, setIsSafeSearchEnabled] = useState(safeSearchLocalStorage);
@@ -38,7 +38,7 @@ const SearchPage = ({setIsNavbarVisible}) => {
     const [pageNumber, setPageNumber] = useState(1);
 
     let {imageData, hasMore} = useImageGet(query, imageType, order, orientation, category, isSafeSearchEnabled, isEditorChoiceEnabled, pageNumber);
-
+    console.log(imageData);
     const handleFilterChange = (key, value, defaultValue) => {
         let queryParams = {}
         if(value !== defaultValue){
@@ -82,7 +82,7 @@ const SearchPage = ({setIsNavbarVisible}) => {
                 />
             </FilterChangeContext.Provider>
             <LastObjectContext hasMore={hasMore} setPageNumber={setPageNumber} >
-            {(imageData && <div className='gallery gallery-photos'>
+            {((imageData.length !== 0) && <div className='gallery gallery-photos'>
                 <Images imageItems={imageData} containers={isLargeScreen ? 4 : isMediumScreen ? 3 : isSmallScreen ? 2 : 1} />
             </div>)}
             <ReactLoading type="bars" style={{margin: "0 auto", height: "100px", width: "100px", fill: "white"}}/>
