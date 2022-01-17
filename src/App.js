@@ -5,7 +5,11 @@ import HomePhoto from "./components/home_photo/HomePhoto";
 import SearchPhoto from "./components/home_search/SearchPhoto";
 import SearchVideo from "./components/home_search/SearchVideo";
 import HomeVideo from "./components/home_video/HomeVideo";
-import SearchPage from "./components/search/SearchPage";
+import SearchPage from "./components/search_photo/SearchPage";
+import SearchVideoPage from "./components/search_video/SearchVideoPage";
+
+export const FilterChangeContext = React.createContext(null);
+export const QueryChangeContext = React.createContext(null);
 
 function App() {
   const [isNavbarVisible, setIsNavbarVisible] = useState(false);
@@ -34,6 +38,7 @@ function App() {
           <Route 
            path="search" >
              <Route path="image/:searchKey" element={<SearchPage setIsNavbarVisible={setIsNavbarVisible} />} />
+             <Route path="video/:searchKey" element={<SearchVideoPage setIsNavbarVisible={setIsNavbarVisible} />} />
            </Route>
 
         </Route>

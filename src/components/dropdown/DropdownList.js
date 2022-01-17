@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
-import { QueryChangeContext } from "../search/SearchBar";
-import { FilterChangeContext } from "../search/SearchPage";
+import { FilterChangeContext, QueryChangeContext } from "../../App";
 
 const DropdownList = ({item, selected, setSelcted, setIsOpen, setSelectedValue}) => {
 
