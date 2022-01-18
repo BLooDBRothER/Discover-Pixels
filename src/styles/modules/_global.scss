@@ -12,6 +12,26 @@ $heading-font: 'Raleway', sans-serif;
 /* size */
 $header-height: 100px;
 
+/* width */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: $primary-color;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: $light-accent;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: $dark-accent;
+}
+
 *, *::after, *::before {
   margin: 0;
   box-sizing: border-box;
