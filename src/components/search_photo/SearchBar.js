@@ -6,6 +6,7 @@ import SearchBarPhoto from '../home_search/SearchBarPhoto';
 import CheckBox from '../checkbox/CheckBox';
 import { categoryDropdownItems, imageTypeDropdownItems, orderDropdownItems, orientationDropdownItems } from './dropdown_items';
 import { QueryChangeContext } from '../../App';
+import ColorFilter from '../ColorFilter/ColorFilter';
 
 function getSearchParamsId(entries){    
     let imgId=0, orienId=0, cateId=0, ordId=0;
@@ -132,6 +133,7 @@ const SearchBar = ({
                         items={orderDropdownItems}
                     />
                 </QueryChangeContext.Provider>
+                <ColorFilter  />
             </div>
         </div>
     )

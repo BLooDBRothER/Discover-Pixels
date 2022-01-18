@@ -9,6 +9,8 @@ import SearchBar from './SearchBar';
 import { FilterChangeContext } from '../../App';
 import NoResult from '../No Result/NoResult';
 
+export const colorArrayContext = React.createContext(null);
+
 
 const SearchPage = ({setIsNavbarVisible}) => {
     // Media query
@@ -36,9 +38,10 @@ const SearchPage = ({setIsNavbarVisible}) => {
     const [orientation, setOrientation] = useState(searchParams.get("orientation") || "orientation");
     const [category, setCategory] = useState(searchParams.get("category") || "category");
     const [order, setOrder] = useState(searchParams.get("order") || "popular");
+    const [colorArray, setColorArray] = useState([]);
     const [pageNumber, setPageNumber] = useState(1);
 
-    const {imageData, hasMore} = useImageGet(query, imageType, order, orientation, category, isSafeSearchEnabled, isEditorChoiceEnabled, pageNumber);
+    const {imageData, hasMore} = useImageGet(query, imageType, order, orientation, category, isSafeSearchEnabled, isEditorChoiceEnabled, pageNumber, colorArray.join(","));
 
     const handleFilterChange = (key, value, defaultValue) => {
         let queryParams = {}
@@ -51,6 +54,10 @@ const SearchPage = ({setIsNavbarVisible}) => {
         }
         setSearchParams(queryParams);
     }
+
+    useEffect(() => {
+        console.log(colorArray);
+    }, [colorArray])
 
     useEffect(() => {
         setQuery(params.searchKey);
@@ -71,16 +78,18 @@ const SearchPage = ({setIsNavbarVisible}) => {
     return (
         <>
             <FilterChangeContext.Provider value={handleFilterChange}>
-                <SearchBar 
-                    isSafeSearchEnabled={isSafeSearchEnabled}
-                    setIsSafeSearchEnabled={setIsSafeSearchEnabled}
-                    isEditorChoiceEnabled={isEditorChoiceEnabled}
-                    setIsEditorChoiceEnabled={setIsEditorChoiceEnabled}
-                    setImageType={setImageType}
-                    setOrientation={setOrientation}
-                    setCategory={setCategory}
-                    setOrder={setOrder}
-                />
+                <colorArrayContext.Provider value={setColorArray}>
+                    <SearchBar 
+                        isSafeSearchEnabled={isSafeSearchEnabled}
+                        setIsSafeSearchEnabled={setIsSafeSearchEnabled}
+                        isEditorChoiceEnabled={isEditorChoiceEnabled}
+                        setIsEditorChoiceEnabled={setIsEditorChoiceEnabled}
+                        setImageType={setImageType}
+                        setOrientation={setOrientation}
+                        setCategory={setCategory}
+                        setOrder={setOrder}
+                    />
+                </colorArrayContext.Provider>
             </FilterChangeContext.Provider>
             <LastObjectContext hasMore={hasMore} setPageNumber={setPageNumber} >
             {((imageData.length !== 0) && <div className='gallery gallery-photos'>
