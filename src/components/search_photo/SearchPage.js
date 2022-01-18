@@ -7,6 +7,7 @@ import Images from '../home_photo/Images';
 import LastObjectContext from '../last_intersection_observer/LastObjectContext';
 import SearchBar from './SearchBar';
 import { FilterChangeContext } from '../../App';
+import NoResult from '../No Result/NoResult';
 
 
 const SearchPage = ({setIsNavbarVisible}) => {
@@ -37,8 +38,8 @@ const SearchPage = ({setIsNavbarVisible}) => {
     const [order, setOrder] = useState(searchParams.get("order") || "popular");
     const [pageNumber, setPageNumber] = useState(1);
 
-    let {imageData, hasMore} = useImageGet(query, imageType, order, orientation, category, isSafeSearchEnabled, isEditorChoiceEnabled, pageNumber);
-    console.log(imageData);
+    const {imageData, hasMore} = useImageGet(query, imageType, order, orientation, category, isSafeSearchEnabled, isEditorChoiceEnabled, pageNumber);
+
     const handleFilterChange = (key, value, defaultValue) => {
         let queryParams = {}
         if(value !== defaultValue){
@@ -85,7 +86,8 @@ const SearchPage = ({setIsNavbarVisible}) => {
             {((imageData.length !== 0) && <div className='gallery gallery-photos'>
                 <Images imageItems={imageData} containers={isLargeScreen ? 4 : isMediumScreen ? 3 : isSmallScreen ? 2 : 1} />
             </div>)}
-            <ReactLoading type="bars" style={{margin: "0 auto", height: "100px", width: "100px", fill: "white"}}/>
+            {(hasMore && <ReactLoading type="bars" style={{margin: "0 auto", height: "100px", width: "100px", fill: "white"}}/>)}
+            {(!hasMore && <NoResult />)}
         </LastObjectContext>
         </>
     )

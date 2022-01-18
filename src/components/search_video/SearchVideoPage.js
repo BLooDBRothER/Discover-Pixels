@@ -7,6 +7,7 @@ import LastObjectContext from '../last_intersection_observer/LastObjectContext';
 import { FilterChangeContext } from '../../App';
 import useVideoGet from '../custom_hooks/useVideoGet';
 import SearchVideoBar from './SearchVideoBar';
+import NoResult from '../No Result/NoResult';
 
 
 const SearchVideoPage = ({setIsNavbarVisible}) => {
@@ -37,8 +38,8 @@ const SearchVideoPage = ({setIsNavbarVisible}) => {
     const [order, setOrder] = useState(searchParams.get("order") || "popular");
     const [pageNumber, setPageNumber] = useState(1);
 
-    let {videoData, hasMore} = useVideoGet(query, videoType, order, orientation, category, isSafeSearchEnabled, isEditorChoiceEnabled, pageNumber);
-    console.log(videoData);
+    const {videoData, hasMore} = useVideoGet(query, videoType, order, orientation, category, isSafeSearchEnabled, isEditorChoiceEnabled, pageNumber);
+
     const handleFilterChange = (key, value, defaultValue) => {
         let queryParams = {}
         if(value !== defaultValue){
@@ -88,7 +89,8 @@ const SearchVideoPage = ({setIsNavbarVisible}) => {
                 containers={isLargeScreen ? 4 : isMediumScreen ? 3 : isSmallScreen ? 2 : 1}
                 />
             </div>)}
-            <ReactLoading type="bars" style={{margin: "0 auto", height: "100px", width: "100px", fill: "white"}}/>
+            {(hasMore && <ReactLoading type="bars" style={{margin: "0 auto", height: "100px", width: "100px", fill: "white"}}/>)}
+            {(!hasMore && <NoResult />)}
         </LastObjectContext>
         </>
     )

@@ -27,6 +27,13 @@ a{
   text-decoration: none;
 }
 
+.no-result{
+  margin: 1rem 0;
+  width: 100%;
+  color: $secondary-color;
+  text-align: center;
+}
+
 @mixin flexSetting($justify, $align, $isColumn: false) {
   display: flex;
   

@@ -5,6 +5,7 @@ import Dropdown from '../dropdown/Dropdown';
 import useImageOrderQuery from './useImageOrderQuery';
 import Images from './Images';
 import LastObjectContext from '../last_intersection_observer/LastObjectContext';
+import NoResult from '../No Result/NoResult';
 
 
 const dropdownItems = [
@@ -52,8 +53,9 @@ const HomePhoto = () => {
                 setSelectedValue={setDropdownValue}
                 items={dropdownItems}
                 />
-                {(imageData && <Images imageItems={imageData} containers={isLargeScreen ? 4 : isMediumScreen ? 3 : isSmallScreen ? 2 : 1} />)}
-                <ReactLoading type="bars" style={{margin: "0 auto", height: "100px", width: "100px", fill: "white"}}/>
+                {((imageData.length!==0) && <Images imageItems={imageData} containers={isLargeScreen ? 4 : isMediumScreen ? 3 : isSmallScreen ? 2 : 1} />)}
+                {(hasMore && <ReactLoading type="bars" style={{margin: "0 auto", height: "100px", width: "100px", fill: "white"}}/>)}
+                {(!hasMore && <NoResult />)}
             </div>
         </LastObjectContext>
         

@@ -46,7 +46,7 @@ const SearchBarVideo = ({classValue, searchBarValue, setSearchBarValue}) => {
     return (
         <form className={`search-form ${classValue}`}>
             <div className='search-input'>
-                <input type="text" placeholder='Search Videos powered By pixabay' className='search-input-value' value={searchBarValue} onChange={(e) => {setSearchBarValue(e.target.value)}} className='search-input-value' onKeyPress={triggerSearch}  />
+                <input type="text" placeholder='Search Videos powered By pixabay' className='search-input-value' value={searchBarValue} onChange={(e) => {setSearchBarValue(e.target.value)}} onKeyPress={triggerSearch}  />
                 <FaSearch className='search-input-ic'/>
             </div>
             <Dropdown

@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
+import ReactLoading from 'react-loading';
 import Dropdown from '../dropdown/Dropdown';
 import Videos from '../Video/Videos';
 import useVideoOrderQuery from './useVideoOrderQuery';
 import LastObjectContext from '../last_intersection_observer/LastObjectContext';
+import NoResult from '../No Result/NoResult';
 
 const dropdownItems = [
     {
@@ -41,16 +43,15 @@ const HomeVideo = () => {
 
     return (
         <LastObjectContext hasMore={hasMore} setPageNumber={setPageNumber}>
-            <div className='home home-videos'>
+            <div className='gallery gallery-videos'>
                 <Dropdown 
-                classValue="home-dropdown"
+                classValue="gallery-dropdown"
                 setSelectedValue={setDropdownValue}
                 items={dropdownItems}
                 />
-                <Videos
-                videoItems={videoData}
-                containers={isLargeScreen ? 4 : isMediumScreen ? 3 : isSmallScreen ? 2 : 1}
-                />
+                {(videoData.length !== 0) && <Videos videoItems={videoData} containers={isLargeScreen ? 4 : isMediumScreen ? 3 : isSmallScreen ? 2 : 1} />}
+                {(hasMore && <ReactLoading type="bars" style={{margin: "0 auto", height: "100px", width: "100px", fill: "white"}}/>)}
+                {(!hasMore && <NoResult />)}
             </div>
         </LastObjectContext>
     )

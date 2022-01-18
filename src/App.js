@@ -11,6 +11,13 @@ import SearchVideoPage from "./components/search_video/SearchVideoPage";
 export const FilterChangeContext = React.createContext(null);
 export const QueryChangeContext = React.createContext(null);
 
+export const getRandomCategory = () => {
+  const category = ["backgrounds", "fashion", "nature", "science", "education", "feelings", "health", "people", "religion", "places", "animals", "industry", "computer", "food", "sports", "transportation", "travel", "buildings", 'business', "music"];
+  const min = 0, max = category.length;
+  const random = Math.floor((Math.random() * (max - min) + min));
+  return category[random];
+}
+
 function App() {
   const [isNavbarVisible, setIsNavbarVisible] = useState(false);
   return (
