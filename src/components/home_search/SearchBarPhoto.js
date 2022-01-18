@@ -39,7 +39,8 @@ const SearchBarPhoto = ({classValue, searchBarValue, setSearchBarValue}) => {
     }
 
     const triggerSearch = (e) => {
-        if((e._reactName === "onKeyPress" && e.code !== "Enter") || searchBarValue === "") return;
+        if((e._reactName === "onKeyPress" && !e.code.includes("Enter")) || searchBarValue === "") return;
+        console.log("he")
         e.preventDefault();
         if(params.searchKey === searchBarValue) return;
         const getSearchParams = returnSearchParams();

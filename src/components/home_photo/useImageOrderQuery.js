@@ -9,6 +9,7 @@ const useImageOrderQuery = (order, pageNumber) => {
 
     useEffect(() => {
         setImageData([]);
+        setHasMore(true);
     }, [order]);
 
     useEffect(() => {

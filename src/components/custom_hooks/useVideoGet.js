@@ -18,10 +18,10 @@ const useVideoGet = (q, video_type, order, orientation, category, safesearch=fal
 
     useEffect(() => {
         seVideoData([]);
+        setHasMore(true);
     }, [q, order, safesearch, editors_choice, category, orientation, video_type]);
 
     useEffect(() => {
-        console.log("hel")
         axios({
             method: "GET",
             url: "https://pixabay.com/api/videos/",

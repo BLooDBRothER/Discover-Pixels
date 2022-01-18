@@ -9,6 +9,7 @@ const useVideoOrderQuery = (order, pageNumber) => {
 
     useEffect(() => {
         setvideoData([]);
+        setHasMore(true);
     }, [order]);
 
     useEffect(() => {

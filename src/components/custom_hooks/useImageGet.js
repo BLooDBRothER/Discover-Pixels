@@ -18,6 +18,7 @@ const useImageGet = (q, image_type, order, orientation, category, safesearch=fal
 
     useEffect(() => {
         setImageData([]);
+        setHasMore(true);
     }, [q, order, safesearch, editors_choice, category, orientation, image_type]);
 
     useEffect(() => {
