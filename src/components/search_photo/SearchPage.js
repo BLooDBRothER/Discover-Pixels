@@ -55,9 +55,9 @@ const SearchPage = ({setIsNavbarVisible}) => {
         setSearchParams(queryParams);
     }
 
-    useEffect(() => {
-        setQuery(params.searchKey);
-    }, [params]);
+    // useEffect(() => {
+    //     setQuery(params.searchKey);
+    // }, [params]);
 
     useEffect(() => {
         setIsNavbarVisible(true);
@@ -68,21 +68,22 @@ const SearchPage = ({setIsNavbarVisible}) => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    useEffect(() => {
-        const queryParams = {colors: colorArray};
-        for(const entry of searchParams.entries()){
-            if(entry[0] === "colors") continue;
-            queryParams[entry[0]] = entry[1];
-        }
-        setSearchParams(queryParams);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [colorArray])
+    // useEffect(() => {
+        // const queryParams = {colors: colorArray};
+        // for(const entry of searchParams.entries()){
+        //     if(entry[0] === "colors") continue;
+        //     queryParams[entry[0]] = entry[1];
+        // }
+        // setSearchParams(queryParams);
+    // // eslint-disable-next-line react-hooks/exhaustive-deps
+    // }, [colorArray])
 
     useEffect(() => {
         searchParams.has("image_type") ? setImageType(searchParams.get("image_type")) : setImageType("images");
         searchParams.has("orientation") ? setOrientation(searchParams.get("orientation")) : setOrientation("orientation");
         searchParams.has("category") ? setCategory(searchParams.get("category")) : setCategory("category");
         searchParams.has("order") ? setOrder(searchParams.get("order")) : setOrder("popular");
+        searchParams.has("colors") ? setColorArray(searchParams.getAll("colors")) : setColorArray([])
     }, [searchParams]);
 
     return (

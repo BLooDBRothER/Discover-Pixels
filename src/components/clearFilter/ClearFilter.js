@@ -5,16 +5,12 @@ const ClearFilter = () => {
     const [isDisabled, setIsDisabled] = useState(true);
     const [searchParams, setSearchParams] = useSearchParams();
 
-    useEffect(() => {console.log(isDisabled)}, [isDisabled])
-
     useEffect(() => {
         searchParams.toString() === '' ? setIsDisabled(true) : setIsDisabled(false);
-        console.log(searchParams, searchParams.values(), searchParams.toString());
-    }, [searchParams])
+    }, [searchParams]);
 
     const clearFilters = () => {
         if(isDisabled) return;
-        console.log("in")
         setSearchParams({});
     }
 

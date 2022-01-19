@@ -11,7 +11,7 @@ export const tempColorContext = React.createContext(null);
 const ColorFilter = () => {
     const [isOpen, setIsOpen] = useState(false);
     const dropdownListRef = useRef(null);
-    const [searchParams] = useSearchParams();
+    const [searchParams, setSearchParams] = useSearchParams();
     const setColorArray = useContext(colorArrayContext);
 
     const [tempColorList, setTempColorList] = useState(searchParams.getAll("colors") || []);
@@ -38,12 +38,22 @@ const ColorFilter = () => {
         }
     }, [isTransparent]);
 
+    useEffect(() => {
+        searchParams.has("colors") ? setTempColorList(searchParams.getAll("colors")) : setTempColorList([])
+    }, [searchParams]);
+
     const toggleDropdown = () => {
         setIsOpen(prevValue => !prevValue);
     }
 
     const updateColorList = () => {
         setColorArray(tempColorList);
+        const queryParams = {colors: tempColorList};
+        for(const entry of searchParams.entries()){
+            if(entry[0] === "colors") continue;
+            queryParams[entry[0]] = entry[1];
+        }
+        setSearchParams(queryParams);
         setIsOpen(false);
     }
 
