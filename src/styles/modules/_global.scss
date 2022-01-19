@@ -5,7 +5,7 @@ $secondary-color: #FFFDFD;
 $dark-accent: #3647DE;
 $light-accent: #41EAD4;
 $img-background: #45454e;
-
+$danger: rgb(138, 16, 16);
 /* fonts */
 $heading-font: 'Raleway', sans-serif;
 
@@ -52,6 +52,19 @@ a{
   width: 100%;
   color: $secondary-color;
   text-align: center;
+}
+
+.clear-filter{
+  background-color: $danger;
+  color: $secondary-color;
+  padding: .5rem 1rem;
+  margin: 0 1rem;
+  border-radius: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  &.disabled{
+    cursor:not-allowed;
+  }
 }
 
 @mixin flexSetting($justify, $align, $isColumn: false) {
