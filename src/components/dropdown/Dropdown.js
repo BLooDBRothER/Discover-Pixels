@@ -35,7 +35,7 @@ const Dropdown = ({classValue, setSelectedValue, defaultVaueId=0, items, enableH
          onMouseEnter={enableHoverEffect ? toggleDropdown.bind(null, true) : undefined}
          onMouseLeave={enableHoverEffect ? toggleDropdown.bind(null, false) : undefined}>
             <div className='dropdown-title' onClick={toggleDropdown.bind(null, !isOpen)}>
-                <h4 className='dropdown-title-value'>{selected.value}</h4>
+                <h4 className='dropdown-title-value'>{selected?.value}</h4>
                 {isOpen ? <FaCaretUp className='dropdown-ic' /> : <FaCaretDown className='dropdown-ic' />}
             </div>
             {isOpen && (

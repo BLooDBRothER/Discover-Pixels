@@ -4,15 +4,17 @@ import { FaCaretDown, FaCaretUp } from 'react-icons/fa';
 import CheckBox from '../checkbox/CheckBox';
 import ColorItem from './ColorItem';
 import { colorArrayContext } from '../search_photo/SearchPage';
+import { useSearchParams } from 'react-router-dom';
 
 export const tempColorContext = React.createContext(null);
 
 const ColorFilter = () => {
     const [isOpen, setIsOpen] = useState(false);
     const dropdownListRef = useRef(null);
+    const [searchParams] = useSearchParams();
     const setColorArray = useContext(colorArrayContext);
 
-    const [tempColorList, setTempColorList] = useState([]);
+    const [tempColorList, setTempColorList] = useState(searchParams.getAll("colors") || []);
     const [isGrayscale, setIsGrayscale] = useState(false);
     const [isTransparent, setIsTransparent] = useState(false);
 
@@ -35,12 +37,6 @@ const ColorFilter = () => {
             setTempColorList(removedColorArray);
         }
     }, [isTransparent]);
-
-
-
-    useEffect(() => {
-        console.log(tempColorList);
-    }, [tempColorList])
 
     const toggleDropdown = () => {
         setIsOpen(prevValue => !prevValue);

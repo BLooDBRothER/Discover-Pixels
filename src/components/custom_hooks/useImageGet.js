@@ -7,8 +7,6 @@ const useImageGet = (q, image_type, order, orientation, category, safesearch=fal
     const [hasMore, setHasMore] = useState(true);
     const per_page = 20;
 
-    console.log(q, colorList);
-
     if(image_type === "images"){
         image_type = "all"
     }
@@ -25,20 +23,22 @@ const useImageGet = (q, image_type, order, orientation, category, safesearch=fal
     }, [q, order, safesearch, editors_choice, category, orientation, image_type, colorList]);
 
     useEffect(() => {
-        axios({
-            method: "GET",
-            url: "https://pixabay.com/api/",
-            params: {key: process.env.REACT_APP_PIXABAY_KEY, q, image_type, order, orientation, category, safesearch,  page: pageNumber, per_page, editors_choice, colors: colorList},
-        }).then(res => {
+        async function getData(){
+            const res = await axios({
+                method: "GET",
+                url: "https://pixabay.com/api/",
+                params: {key: process.env.REACT_APP_PIXABAY_KEY, q, image_type, order, orientation, category, safesearch,  page: pageNumber, per_page, editors_choice, colors: colorList},
+            });
             console.log(res.data);
-            if((pageNumber*per_page) >= res.data.totalHits){
-                setHasMore(false);
+            if((pageNumber*per_page) >= res.data.totalHits || res.data.totalHits <= pageNumber){
+                    setHasMore(false);
             }
             setImageData(prevState => [...prevState, ...res.data.hits]);
-        }).catch(e => {
-            console.log(e);
-        });
-    }, [q, image_type, order, orientation, category, safesearch, editors_choice, pageNumber, colorList]);
+        }
+        if(hasMore)
+            getData();
+        
+    }, [q, image_type, order, orientation, category, safesearch, editors_choice, pageNumber, colorList, hasMore]);
     return {imageData, hasMore};
 }
 

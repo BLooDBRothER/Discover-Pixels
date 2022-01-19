@@ -38,7 +38,7 @@ const SearchPage = ({setIsNavbarVisible}) => {
     const [orientation, setOrientation] = useState(searchParams.get("orientation") || "orientation");
     const [category, setCategory] = useState(searchParams.get("category") || "category");
     const [order, setOrder] = useState(searchParams.get("order") || "popular");
-    const [colorArray, setColorArray] = useState([]);
+    const [colorArray, setColorArray] = useState(searchParams.getAll("colors") || []);
     const [pageNumber, setPageNumber] = useState(1);
 
     const {imageData, hasMore} = useImageGet(query, imageType, order, orientation, category, isSafeSearchEnabled, isEditorChoiceEnabled, pageNumber, colorArray.join(","));
@@ -56,17 +56,27 @@ const SearchPage = ({setIsNavbarVisible}) => {
     }
 
     useEffect(() => {
-        console.log(colorArray);
-    }, [colorArray])
-
-    useEffect(() => {
         setQuery(params.searchKey);
     }, [params]);
 
     useEffect(() => {
         setIsNavbarVisible(true);
+        for(const entry of searchParams.entries())
+        {
+            console.log(entry);
+        }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
+
+    useEffect(() => {
+        const queryParams = {colors: colorArray};
+        for(const entry of searchParams.entries()){
+            if(entry[0] === "colors") continue;
+            queryParams[entry[0]] = entry[1];
+        }
+        setSearchParams(queryParams);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [colorArray])
 
     useEffect(() => {
         searchParams.has("image_type") ? setImageType(searchParams.get("image_type")) : setImageType("images");

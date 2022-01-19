@@ -7,6 +7,7 @@ import CheckBox from '../checkbox/CheckBox';
 import { categoryDropdownItems, imageTypeDropdownItems, orderDropdownItems, orientationDropdownItems } from './dropdown_items';
 import { QueryChangeContext } from '../../App';
 import ColorFilter from '../ColorFilter/ColorFilter';
+import ClearFilter from '../clearFilter/ClearFilter';
 
 function getSearchParamsId(entries){    
     let imgId=0, orienId=0, cateId=0, ordId=0;
@@ -21,10 +22,12 @@ function getSearchParamsId(entries){
             case "category":
                 cateId = categoryDropdownItems.findIndex(item => item.value.toLowerCase() === entry[1]);
                 break;
-            default:
+            case "order":
                 ordId = orderDropdownItems.findIndex(item => item.value.toLowerCase() === entry[1]);
+                break;
+            default:
         }
-    } 
+    }
     return [imgId, orienId, cateId, ordId];
 }
 
@@ -76,13 +79,11 @@ const SearchBar = ({
     }, [params]);
 
     useEffect(() => {
-        // console.log(params);
         const [imageTypeId, oreintationId, categoryId, orderId] = getSearchParamsId(searchParams.entries());
         setImageTypeId(imageTypeId);
         setOreintationId(oreintationId);
         setCategoryId(categoryId);
         setOrderId(orderId);
-        // console.log(imageTypeId, oreintationId, categoryId, orderId)
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [searchParams]);
 
@@ -134,6 +135,7 @@ const SearchBar = ({
                     />
                 </QueryChangeContext.Provider>
                 <ColorFilter  />
+                <ClearFilter />
             </div>
         </div>
     )
