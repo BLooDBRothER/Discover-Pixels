@@ -1,5 +1,4 @@
-import React from 'react'
-import {AiOutlineDownload} from 'react-icons/ai';
+import React from 'react';
 
 const ImageMetadata = ({size, maxWidth, maxHeight}) => {
     return (

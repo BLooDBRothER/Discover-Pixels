@@ -55,28 +55,14 @@ const SearchPage = ({setIsNavbarVisible}) => {
         setSearchParams(queryParams);
     }
 
-    // useEffect(() => {
-    //     setQuery(params.searchKey);
-    // }, [params]);
+    useEffect(() => {
+        setQuery(params.searchKey);
+    }, [params]);
 
     useEffect(() => {
         setIsNavbarVisible(true);
-        for(const entry of searchParams.entries())
-        {
-            console.log(entry);
-        }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
-
-    // useEffect(() => {
-        // const queryParams = {colors: colorArray};
-        // for(const entry of searchParams.entries()){
-        //     if(entry[0] === "colors") continue;
-        //     queryParams[entry[0]] = entry[1];
-        // }
-        // setSearchParams(queryParams);
-    // // eslint-disable-next-line react-hooks/exhaustive-deps
-    // }, [colorArray])
 
     useEffect(() => {
         searchParams.has("image_type") ? setImageType(searchParams.get("image_type")) : setImageType("images");

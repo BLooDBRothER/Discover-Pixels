@@ -5,6 +5,7 @@ import HomePhoto from "./components/home_photo/HomePhoto";
 import SearchPhoto from "./components/home_search/SearchPhoto";
 import SearchVideo from "./components/home_search/SearchVideo";
 import HomeVideo from "./components/home_video/HomeVideo";
+import ImagePage from "./components/image_page/ImagePage";
 import SearchPage from "./components/search_photo/SearchPage";
 import SearchVideoPage from "./components/search_video/SearchVideoPage";
 
@@ -47,7 +48,7 @@ function App() {
              <Route path="image/:searchKey" element={<SearchPage setIsNavbarVisible={setIsNavbarVisible} />} />
              <Route path="video/:searchKey" element={<SearchVideoPage setIsNavbarVisible={setIsNavbarVisible} />} />
            </Route>
-
+           <Route path="image/:imageId" element={<ImagePage setIsNavbarVisible={setIsNavbarVisible} />}/>
         </Route>
       </Routes>
     </BrowserRouter>
