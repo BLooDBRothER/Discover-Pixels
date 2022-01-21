@@ -48,7 +48,7 @@ const SearchBarPhoto = ({classValue, searchBarValue, setSearchBarValue}) => {
     }
 
     return (
-        <form className={`search-form ${classValue}`}>
+        <form className={`search-form ${classValue}`} onSubmit={(e) => {e.preventDefault()}}>
             <div className='search-input'>
                 <input type="text" placeholder='Search Images powered By pixabay' value={searchBarValue} onChange={(e) => {setSearchBarValue(e.target.value)}} className='search-input-value' onKeyPress={triggerSearch} />
                 <FaSearch className='search-input-ic' onClick={triggerSearch}/>

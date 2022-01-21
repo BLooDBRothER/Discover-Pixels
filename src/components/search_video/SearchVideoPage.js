@@ -53,6 +53,10 @@ const SearchVideoPage = ({setIsNavbarVisible}) => {
     }
 
     useEffect(() => {
+        setPageNumber(1);
+    }, [query, order, isSafeSearchEnabled, isEditorChoiceEnabled, category, orientation, videoType]);
+
+    useEffect(() => {
         setQuery(params.searchKey);
     }, [params]);
 
@@ -63,7 +67,6 @@ const SearchVideoPage = ({setIsNavbarVisible}) => {
 
     useEffect(() => {
         searchParams.has("video_type") ? setVideoType(searchParams.get("video_type")) : setVideoType("images");
-        console.log(searchParams.has("category"));
         searchParams.has("category") ? setCategory(searchParams.get("category")) : setCategory("category");
         searchParams.has("order") ? setOrder(searchParams.get("order")) : setOrder("popular");
     }, [searchParams]);

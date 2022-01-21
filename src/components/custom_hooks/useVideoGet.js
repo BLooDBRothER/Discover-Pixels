@@ -22,19 +22,20 @@ const useVideoGet = (q, video_type, order, orientation, category, safesearch=fal
     }, [q, order, safesearch, editors_choice, category, orientation, video_type]);
 
     useEffect(() => {
-        axios({
-            method: "GET",
-            url: "https://pixabay.com/api/videos/",
-            params: {key: process.env.REACT_APP_PIXABAY_KEY, q, video_type, order, orientation, category, safesearch,  page: pageNumber, per_page, editors_choice},
-        }).then(res => {
+        async function getData(){
+            const res = await axios({
+                method: "GET",
+                url: "https://pixabay.com/api/videos/",
+                params: {key: process.env.REACT_APP_PIXABAY_KEY, q, video_type, order, orientation, category, safesearch,  page: pageNumber, per_page, editors_choice},
+            });
             console.log(res.data);
-            if((pageNumber*per_page) >= res.data.totalHits){
-                setHasMore(false);
+            if((pageNumber*per_page) >= res.data.totalHits || res.data.totalHits <= pageNumber){
+                    setHasMore(false);
             }
             seVideoData(prevState => [...prevState, ...res.data.hits]);
-        }).catch(e => {
-            console.log(e);
-        })
+        }
+        if(hasMore)
+            getData();
     }, [q, video_type, order, orientation, category, safesearch, editors_choice, pageNumber]);
     return {videoData, hasMore};
 }

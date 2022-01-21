@@ -6,11 +6,11 @@ import SearchBarVideo from '../home_search/SearchBarVideo';
 import { videoTypeDropdownItems, categoryDropdownItems, orderDropdownItems } from '../search_photo/dropdown_items';
 import CheckBox from '../checkbox/CheckBox';
 import { QueryChangeContext } from '../../App';
+import ClearFilter from '../clearFilter/ClearFilter';
 
 function getSearchParamsId(entries){    
     let imgId=0, cateId=0, ordId=0;
     for(const entry of entries){
-        console.log(entry);
         switch(entry[0]){
             case "video_type":
                 imgId = videoTypeDropdownItems.findIndex(item => item.value.toLowerCase() === entry[1]);
@@ -72,7 +72,6 @@ const SearchVideoBar = ({
         setVideoTypeId(videoId);
         setCategoryId(categoryId);
         setOrderId(orderId);
-        console.log(videoTypeId, categoryId, orderId)
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [searchParams]);
 
@@ -115,6 +114,7 @@ const SearchVideoBar = ({
                         items={orderDropdownItems}
                     />
                 </QueryChangeContext.Provider>
+                <ClearFilter />
             </div>
         </div>
     )

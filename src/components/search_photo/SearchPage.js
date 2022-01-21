@@ -56,6 +56,10 @@ const SearchPage = ({setIsNavbarVisible}) => {
     }
 
     useEffect(() => {
+        setPageNumber(1);
+    }, [query, order, isSafeSearchEnabled, isEditorChoiceEnabled, category, orientation, imageType, colorArray]);
+
+    useEffect(() => {
         setQuery(params.searchKey);
     }, [params]);
 

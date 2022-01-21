@@ -35,7 +35,7 @@ const SearchBarVideo = ({classValue, searchBarValue, setSearchBarValue}) => {
     }
 
     const triggerSearch = (e) => {
-        if((e._reactName === "onKeyPress" && e.code !== "Enter") || searchBarValue === "") return;
+        if((e._reactName === "onKeyPress" && !e.code.includes("Enter")) || searchBarValue === "") return;
         e.preventDefault();
         if(params.searchKey === searchBarValue) return;
         const getSearchParams = returnSearchParams();
@@ -44,7 +44,7 @@ const SearchBarVideo = ({classValue, searchBarValue, setSearchBarValue}) => {
     }
 
     return (
-        <form className={`search-form ${classValue}`}>
+        <form className={`search-form ${classValue}`} onSubmit={(e) => {e.preventDefault()}} >
             <div className='search-input'>
                 <input type="text" placeholder='Search Videos powered By pixabay' className='search-input-value' value={searchBarValue} onChange={(e) => {setSearchBarValue(e.target.value)}} onKeyPress={triggerSearch}  />
                 <FaSearch className='search-input-ic'/>
