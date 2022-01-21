@@ -1,6 +1,6 @@
 .search{
     @include flexSetting(space-around, center, true);
-    height: 500px;
+    height: clamp(300px, 40vw, 500px);
     position: relative;
     overflow: hidden;
 
@@ -39,7 +39,7 @@
     }
 
     & .home-search{
-        width: 45%;
+        // width: 100%;
 
         & .search-dropdown{
             & .dropdown-title{            

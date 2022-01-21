@@ -36,6 +36,7 @@ const useVideoGet = (q, video_type, order, orientation, category, safesearch=fal
         }
         if(hasMore)
             getData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [q, video_type, order, orientation, category, safesearch, editors_choice, pageNumber]);
     return {videoData, hasMore};
 }

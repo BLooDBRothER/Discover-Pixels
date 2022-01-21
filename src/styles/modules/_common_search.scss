@@ -1,19 +1,26 @@
 .search{
+    &-title{
+        font-size: clamp(.8rem, 5vw, 2rem);
+    }
+
     &-form{
-        @include flexSetting(flex-start, center);
+        width: 50%;
+        @include flexSetting(center, center);
     }
 
     &-input{
         @include flexSetting(flex-start, center);
-        flex: 1;
+        width: 100%;
+        // flex: 1;
         &-value, &-ic{
             z-index: 1;
         }
 
         &-value{
             flex: 1;
-            font-size: 1.3rem;
+            font-size: clamp(.8rem, 4vw, 1.3rem);
             border-radius: 25px 0 0 25px;
+            height: 40px;
             padding: .5rem 1rem;
             border: none;
             outline: none;
@@ -32,12 +39,13 @@
         }
     }
     &-dropdown{
-        min-width: 160px;
+        min-width: clamp(100px, 17vw, 160px);
         height: 40px;
         & .dropdown-title{            
             padding: .5rem 0 0.5rem 1rem;
             color: $secondary-color;
             border-radius: 0 25px 25px 0;
+            height: 40px;
             background-color: rgba(0, 0, 0, 0.35);
         }
 
@@ -49,7 +57,7 @@
             background-color: rgba(0, 0, 0, 0.35);
             color: $secondary-color;
             border-color: $secondary-color;
-            width: 160px;
+            width: clamp(100px, 17vw, 160px);
             border-radius: 0 0 25px 0;
             overflow: hidden;
             & > .dropdown-list{
@@ -58,3 +66,24 @@
         }
     }
 }
+
+@media (max-width: 970px){
+    .search{
+        &-form{
+            width: 80%;
+        }
+    }
+}
+
+// @media (max-width: 590px){
+//     .search{
+//         &-input{
+//             width: 80%;
+//         }
+
+//         &-input-value{
+//             // flex: unset;
+
+//         }
+//     }
+// }

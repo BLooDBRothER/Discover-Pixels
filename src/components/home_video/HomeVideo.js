@@ -27,7 +27,7 @@ const HomeVideo = () => {
         query: "(min-width: 1280px)",
     });
     const isSmallScreen = useMediaQuery({
-        query: "(min-width: 880px)"
+        query: "(min-width: 350px)"
     });
 
     const [dropdownValue, setDropdownValue] = useState("popular");

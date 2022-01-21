@@ -5,7 +5,7 @@
 
     &-title{
         @include flexSetting(space-between, center);
-        font-size: 1.3rem;
+        font-size: clamp(.8rem, 4vw, 1.3rem);
         width: 100%;
     }
     &-title-value{
@@ -23,7 +23,7 @@
         position: absolute;
         top: 100%;
         left: 0;
-        font-size: 1.3em;
+        font-size: clamp(.8rem, 4vw, 1.3rem);
         z-index: 10;
         animation: scaleIn .2s ease;
 

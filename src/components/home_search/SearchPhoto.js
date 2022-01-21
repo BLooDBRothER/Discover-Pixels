@@ -12,7 +12,7 @@ const SearchPhoto = ({setIsNavbarVisible}) => {
 
     return (
         <div className='search search-backdrop'>
-            <h1>Discover your Pixels Here !!!!</h1>
+            <h1 className='search-title'>Discover your Pixels Here !!!!</h1>
             <SearchBarPhoto classValue="home-search" searchBarValue={searchBarValue} setSearchBarValue={setSearchBarValue} />
             <SearchFooter />
         </div>
