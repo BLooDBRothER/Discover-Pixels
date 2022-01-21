@@ -2,12 +2,12 @@ import React, { useContext, useState, useEffect } from 'react';
 import { TiTick } from "react-icons/ti";
 import { tempColorContext } from './ColorFilter';
 
-const ColorItem = ({theme, colorValue}) => {
+const ColorItem = ({theme, colorValue, colorName}) => {
     const [isSelected, setIsSelected] = useState(false);
     const {tempColorList, setTempColorList} = useContext(tempColorContext);
 
     useEffect(() => {
-        if(tempColorList.some(color => color === colorValue)){
+        if(tempColorList.some(color => color === colorName)){
             setIsSelected(true);
         }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -15,17 +15,17 @@ const ColorItem = ({theme, colorValue}) => {
 
     const toggleSelection = () => {
         if(!isSelected){
-            setTempColorList(prevArray => [...prevArray, colorValue]);
+            setTempColorList(prevArray => [...prevArray, colorName]);
         }
         else{
-            const removedColorArray = tempColorList.filter(color => color !== colorValue);
+            const removedColorArray = tempColorList.filter(color => color !== colorName);
             setTempColorList(removedColorArray);
         }
         setIsSelected(prev => !prev);
     }
 
     return (
-        <div className='colors' style={{backgroundColor: colorValue === "lilac" ? "#c93ef7" : colorValue}} onClick={toggleSelection}>
+        <div className='colors' style={{backgroundColor: colorValue}} onClick={toggleSelection}>
             {isSelected && <TiTick className={`color-selected-ic ${theme === "dark" ? "dark" : "light"}`}/>}
         </div>
     )

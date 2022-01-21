@@ -8,6 +8,64 @@ import { useSearchParams } from 'react-router-dom';
 
 export const tempColorContext = React.createContext(null);
 
+const colorItem = [
+    {
+        name: "red",
+        value: "#FF0000",
+        theme: "dark"
+    },
+    {
+        name: "orange",
+        value: "#FFA500",
+        theme: "light"
+    },
+    {
+        name: "yellow",
+        value: "#FF0000",
+        theme: "light"
+    },
+    {
+        name: "turquoise",
+        value: "#40E0D0",
+        theme: "light"
+    },
+    {
+        name: "blue",
+        value: "#0000FF",
+        theme: "dark"
+    },
+    {
+        name: "lilac",
+        value: "#c93ef7",
+        theme: "light"
+    },
+    {
+        name: "pink",
+        value: "#FFC0CB",
+        theme: "light"
+    },
+    {
+        name: "white",
+        value: "#FFF",
+        theme: "light"
+    },
+    {
+        name: "gray",
+        value: "#808080",
+        theme: "dark"
+    },
+    {
+        name: "black",
+        value: "#000",
+        theme: "dark"
+    },
+    {
+        name: "brown",
+        value: "#A52A2A",
+        theme: "dark"
+    },
+]
+
 const ColorFilter = () => {
     const [isOpen, setIsOpen] = useState(false);
     const dropdownListRef = useRef(null);
@@ -69,18 +127,7 @@ const ColorFilter = () => {
                     <CheckBox value="Transparent" checkboxStatue={isTransparent} setCheckedStatus={setIsTransparent}></CheckBox>
                     <tempColorContext.Provider value={{tempColorList ,setTempColorList}}>
                         <div className='color-filter-palette'>
-                            <ColorItem theme="dark" colorValue="red" />
-                            <ColorItem theme="light" colorValue="orange" />
-                            <ColorItem theme="light" colorValue="yellow" />
-                            <ColorItem theme="dark" colorValue="green" />
-                            <ColorItem theme="light" colorValue="turquoise" />
-                            <ColorItem theme="dark" colorValue="blue" />
-                            <ColorItem theme="light" colorValue="lilac" />
-                            <ColorItem theme="light" colorValue="pink" />
-                            <ColorItem theme="light" colorValue="white" />
-                            <ColorItem theme="dark" colorValue="gray" />
-                            <ColorItem theme="dark" colorValue="black" />
-                            <ColorItem theme="dark" colorValue="brown" />
+                            {colorItem.map(color => <ColorItem key={color.name} theme={color.theme} colorValue={color.value} colorName={color.name} />)}
                         </div>
                     </tempColorContext.Provider>
                     <div className='apply-filter' onClick={updateColorList}>Apply</div>
