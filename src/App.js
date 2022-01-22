@@ -8,6 +8,7 @@ import HomeVideo from "./components/home_video/HomeVideo";
 import ImagePage from "./components/image_page/ImagePage";
 import SearchPage from "./components/search_photo/SearchPage";
 import SearchVideoPage from "./components/search_video/SearchVideoPage";
+import VideoPage from "./components/video_page/VideoPage";
 
 export const FilterChangeContext = React.createContext(null);
 export const QueryChangeContext = React.createContext(null);
@@ -49,6 +50,7 @@ function App() {
              <Route path="video/:searchKey" element={<SearchVideoPage setIsNavbarVisible={setIsNavbarVisible} />} />
            </Route>
            <Route path="image/:imageId" element={<ImagePage setIsNavbarVisible={setIsNavbarVisible} />}/>
+           <Route path="vid/:videoId" element={<VideoPage setIsNavbarVisible={setIsNavbarVisible} />}/>
         </Route>
       </Routes>
     </BrowserRouter>

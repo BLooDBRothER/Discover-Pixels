@@ -99,4 +99,4 @@ const SearchVideoPage = ({setIsNavbarVisible}) => {
     )
 }
 
-export default SearchVideoPage
+export default SearchVideoPage;

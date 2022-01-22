@@ -2,10 +2,10 @@ import React from 'react'
 import {BsArrowRightCircleFill} from 'react-icons/bs';
 import { useNavigate } from 'react-router-dom';
 
-const ImageUserData = ({name, picUrl}) => {
+const ImageUserData = ({name, picUrl, navigateUrl}) => {
     const navigate = useNavigate();
     const loadUserImage = () => {
-        navigate(`/search/image/user:${name}`);
+        navigate(navigateUrl);
     }
 
     return (

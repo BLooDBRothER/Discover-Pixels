@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { BiLoaderCircle } from 'react-icons/bi';
+import { useNavigate } from "react-router-dom";
 import VideoAuthor from "./VideoAuthor";
 import VideoMetadata from "./VideoMetadata";
 
-const VideoElement = ({src, picId, videoX, author, metadata, lastVideoRef}) => {
+const VideoElement = ({src, picId, videoX, author, metadata, lastVideoRef, videoId}) => {
   const [isVideoVisible, setIsVideoVisible] = useState(false);
   const [isVideoLoading, setIsVideoLoading] = useState(false);
+  const navigate = useNavigate();
 
   const loadVideo = (e) => {
     setIsVideoVisible(true);
@@ -21,12 +23,16 @@ const VideoElement = ({src, picId, videoX, author, metadata, lastVideoRef}) => {
     setIsVideoLoading(false);
   }
 
+  const navigateToVideoPage = () => {
+    navigate(`/vid/${videoId}`);
+  }
+
   const setAutoHeight = (e) => {
     e.target.style.height = "auto";
   }
 
   return (
-    <div className="video" ref={lastVideoRef} onMouseEnter={loadVideo} onMouseLeave={cancelVideo} onMouseOut={cancelVideo} onTouchStart={loadVideo} onTouchEnd={cancelVideo} onTouchCancel={cancelVideo}>
+    <div className="video" ref={lastVideoRef} onClick={navigateToVideoPage} onMouseEnter={loadVideo} onMouseLeave={cancelVideo} onMouseOut={cancelVideo} onTouchStart={loadVideo} onTouchEnd={cancelVideo} onTouchCancel={cancelVideo}>
       <VideoAuthor authorName={author.name} authorPic={author.url} />
       {isVideoVisible && (
         <video className={`video-${videoX}x video-element ${isVideoLoading ? "none" : ""}`} onLoadedData={afterLoad} loop muted autoPlay controls = ''>

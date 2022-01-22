@@ -25,6 +25,7 @@ const Video = ({ videoItems, indexPosition, videoX}) => {
                 downloads: item.downloads,
               }}
               lastVideoRef={isLastVideoObject(index, item.id) ? lastContextData : null}
+              videoId = {item.id}
             />
           );
         }

@@ -1,10 +1,10 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const TagButton = ({value}) => {
+const TagButton = ({value, navigateUrl}) => {
     const navigate = useNavigate();
     const navigatCategory = () => {
-        navigate(`/search/image/${value}`);
+        navigate(navigateUrl);
     }
     // console.log(value?.split(", ").map(tag => {console.log(tag); return tag;}));
     return (

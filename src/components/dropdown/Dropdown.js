@@ -25,7 +25,7 @@ const Dropdown = ({classValue, setSelectedValue, defaultVaueId=0, items, enableH
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [defaultVaueId]);
 
-    const toggleDropdown = (value, e) => {
+    const toggleDropdown = (value) => {
         setIsOpen(value);
     }
 
