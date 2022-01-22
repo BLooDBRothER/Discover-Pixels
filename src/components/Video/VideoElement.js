@@ -26,7 +26,7 @@ const VideoElement = ({src, picId, videoX, author, metadata, lastVideoRef}) => {
   }
 
   return (
-    <div className="video" ref={lastVideoRef} onMouseEnter={loadVideo} onMouseLeave={cancelVideo} onMouseOut={cancelVideo}>
+    <div className="video" ref={lastVideoRef} onMouseEnter={loadVideo} onMouseLeave={cancelVideo} onMouseOut={cancelVideo} onTouchStart={loadVideo} onTouchEnd={cancelVideo} onTouchCancel={cancelVideo}>
       <VideoAuthor authorName={author.name} authorPic={author.url} />
       {isVideoVisible && (
         <video className={`video-${videoX}x video-element ${isVideoLoading ? "none" : ""}`} onLoadedData={afterLoad} loop muted autoPlay controls = ''>
@@ -37,6 +37,7 @@ const VideoElement = ({src, picId, videoX, author, metadata, lastVideoRef}) => {
           className={`video-${videoX}x`}
           style={{height: "400px"}}
           onLoad={setAutoHeight}
+          onContextMenu={(e) => {e.preventDefault()}}
           src={`https://i.vimeocdn.com/video/${picId}_640x360.jpg`}
           alt="preview"
       />

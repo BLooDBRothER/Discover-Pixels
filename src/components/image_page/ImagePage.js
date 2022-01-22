@@ -34,7 +34,7 @@ const ImagePage = ({setIsNavbarVisible}) => {
             <img className='main-image--img' src={imageData.largeImageURL} alt={imageData.tags} />
             <div className='image-data'>
                 <ImageUserData name={imageData.user} picUrl={imageData.userImageURL} />
-                <ImageMetadata size={imageData.imageSize} maxHeight={imageData.imageHeight} maxWidth={imageData.imageWidth} />
+                <ImageMetadata size={imageData.imageSize} maxHeight={imageData.imageHeight} maxWidth={imageData.imageWidth} type={imageData.type} />
                 <DownloadButton src={imageData.pageURL}/>
                 <div className='image-data-category'>
                     {imageData.tags?.split(", ").map(tag => {

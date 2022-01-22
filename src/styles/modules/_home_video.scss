@@ -18,6 +18,7 @@
 
             & video, & img{
                 background-color: $img-background;
+                user-select: none;
             }
 
             & .video-author, & .video-metadata{
@@ -108,5 +109,17 @@
     }
     100%{
         transform: translate(-50%, -50%) rotate(0turn);
+    }
+}
+
+@media (max-width: 700px){
+    .video-containers .video-container .video .video-author, .video-containers .video-container .video .video-metadata{
+        position: relative;
+        height: 50px;
+        padding: .5rem;
+        background-color: rgba(255, 255, 255, 0.05);
+    }
+    .video-containers .video-container .video-element{
+        top: 50px;
     }
 }

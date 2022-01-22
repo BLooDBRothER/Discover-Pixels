@@ -29,7 +29,7 @@ const HomePhoto = () => {
         query: "(min-width: 1280px)",
     });
     const isSmallScreen = useMediaQuery({
-        query: "(min-width: 350px)"
+        query: "(min-width: 700px)"
     });
 
     // const [isOpen, setIsOpen] = useState(false);
