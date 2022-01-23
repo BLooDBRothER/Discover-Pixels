@@ -25,6 +25,11 @@ const colorItem = [
         theme: "light"
     },
     {
+        name: "green",
+        value: "#00FF00",
+        theme: "light"
+    },
+    {
         name: "turquoise",
         value: "#40E0D0",
         theme: "light"

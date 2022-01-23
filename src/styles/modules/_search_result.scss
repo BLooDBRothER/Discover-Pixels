@@ -2,15 +2,20 @@
     padding: 1rem;
     border-top: 1px solid $secondary-color;
     border-Bottom: 1px solid $secondary-color;
-
     &-1{
         @include flexSetting(space-between, center);
         margin: 1rem 0;
+        flex-wrap: wrap;
     }
 
     &-2{
+        width: 100%;
         @include flexSetting(flex-end, center);
-        margin: 1.5rem 0;
+        // margin: 1.5rem 0;
+        flex-wrap: wrap;
+        & > *{
+            margin: .8rem 2rem;
+        }
     }
 
     &-1 &-dropdown{
@@ -21,7 +26,7 @@
         border-radius: 20px;
         width: 160px;
         background-color: $secondary-color;
-        margin:  0 2rem;
+        // margin:  0 2rem;
         &.active{
             border-radius: 20px 20px 0 0;
         }
@@ -42,6 +47,9 @@
 
     &-bar{
         width: 50%;
+        // &-search-input-value{
+
+        // }
     }
 
     &-checkbox{
@@ -54,7 +62,7 @@
     }
 
     & .search-dropdown{
-        min-width: 160px;
+        width: clamp(100px, 17vw, 160px);
         height: 40px;
         border-radius: 0 25px 25px 0;
         & .dropdown-title{            
@@ -75,4 +83,23 @@
             }
         }
     }
+}
+
+@media (max-width: 1000px){
+    .search-result{
+        &-1{
+            @include flexSetting(flex-start, center, true);
+            // margin: 1rem 0;
+            flex-wrap: wrap;
+            & > *{
+                margin: 1rem;
+            }
+        }
+        &-2{
+            justify-content: space-evenly;
+        }
+        &-bar{
+            width: 80%;
+        }
+    }    
 }
