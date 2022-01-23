@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { createRef, useCallback, useEffect, useRef, useState } from 'react';
+import React, {useCallback, useEffect, useRef, useState } from 'react';
 import { useParams, useSearchParams } from 'react-router-dom';
 import Dropdown from '../dropdown/Dropdown';
 import SearchBarPhoto from '../home_search/SearchBarPhoto';

@@ -86,6 +86,8 @@ const ColorFilter = ({triggerClose = false}) => {
         setIsOpen(false);
     }, [triggerClose])
 
+    useEffect(() => {console.log(tempColorList)}, [tempColorList])
+
     useEffect(() => {
         if(isGrayscale){
             setTempColorList(prev => [...prev, "grayscale"]);
@@ -107,7 +109,11 @@ const ColorFilter = ({triggerClose = false}) => {
     }, [isTransparent]);
 
     useEffect(() => {
-        searchParams.has("colors") ? setTempColorList(searchParams.getAll("colors")) : setTempColorList([])
+        let tempList = [];
+        tempList = searchParams.has("colors") ? searchParams.getAll("colors") : [];
+        if(tempList.some(list => list === "grayscale")) setIsGrayscale(true);
+        if(tempList.some(list => list === "transparent")) setIsTransparent(true);
+        setTempColorList(tempList);
     }, [searchParams]);
 
     const toggleDropdown = () => {
@@ -115,12 +121,15 @@ const ColorFilter = ({triggerClose = false}) => {
     }
 
     const updateColorList = () => {
-        setColorArray(tempColorList);
-        const queryParams = {colors: tempColorList};
+        console.log(tempColorList);
+        const temp = [...(new Set(tempColorList))];
+        setTempColorList(temp);
+        const queryParams = {colors: temp};
         for(const entry of searchParams.entries()){
             if(entry[0] === "colors") continue;
             queryParams[entry[0]] = entry[1];
         }
+        console.log(queryParams);
         setSearchParams(queryParams);
         setIsOpen(false);
     }
