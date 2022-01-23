@@ -26,6 +26,8 @@
         font-size: clamp(.8rem, 4vw, 1.3rem);
         z-index: 10;
         animation: scaleIn .2s ease;
+        max-height: 400px;
+        overflow: auto !important;
 
         & > .dropdown-list{
             cursor: pointer;

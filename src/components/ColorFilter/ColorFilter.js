@@ -71,7 +71,7 @@ const colorItem = [
     },
 ]
 
-const ColorFilter = () => {
+const ColorFilter = ({triggerClose = false}) => {
     const [isOpen, setIsOpen] = useState(false);
     const dropdownListRef = useRef(null);
     const [searchParams, setSearchParams] = useSearchParams();
@@ -80,6 +80,11 @@ const ColorFilter = () => {
     const [tempColorList, setTempColorList] = useState(searchParams.getAll("colors") || []);
     const [isGrayscale, setIsGrayscale] = useState(false);
     const [isTransparent, setIsTransparent] = useState(false);
+
+    useEffect(() => {
+        if(!triggerClose)return;
+        setIsOpen(false);
+    }, [triggerClose])
 
     useEffect(() => {
         if(isGrayscale){

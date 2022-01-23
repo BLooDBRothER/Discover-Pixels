@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useState } from 'react';
+import React, { createRef, useCallback, useEffect, useRef, useState } from 'react';
 import { useParams, useSearchParams } from 'react-router-dom';
 import Dropdown from '../dropdown/Dropdown';
 import SearchBarPhoto from '../home_search/SearchBarPhoto';
@@ -66,13 +66,33 @@ const SearchBar = ({
     const [oreintationId, setOreintationId] = useState(0);
     const [categoryId, setCategoryId] = useState(0);
     const [orderId, setOrderId] = useState(0);
-    
+    const [isSearchbarVisible, setIsSearchbarVisible] = useState(false);
+
     const [searchBarValue, setSearchBarValue] = useState(params.searchKey);
 
     const updateLocalStorage = () => {
         localStorage.setItem("safeSearch", isSafeSearchEnabled);
         localStorage.setItem("editorChoice", isEditorChoiceEnabled);
     }
+
+    const observer = useRef();
+    const setIntersection = useCallback((node) => {
+        if(!node) return;
+        if(observer.current) observer.current.disconnect();
+        observer.current = new IntersectionObserver((entry) => {
+            if(entry[0].intersectionRatio === 0){
+                setIsSearchbarVisible(true);
+            }
+            else{
+                setIsSearchbarVisible(false);
+            }
+        })
+        observer.current.observe(node);
+    });
+
+    useEffect(() => {
+        return () => {observer.current?.disconnect()}
+    }, []);
 
     useEffect(() => {
         setSearchBarValue(params.searchKey);
@@ -93,7 +113,9 @@ const SearchBar = ({
     }, [isSafeSearchEnabled, isEditorChoiceEnabled]);
 
     return (
-        <div className='search-result'>
+        <>
+        {isSearchbarVisible && <SearchBarPhoto classValue="search-result-fixed-bar" searchBarValue={searchBarValue} setSearchBarValue={setSearchBarValue} />}
+        <div className='search-result' ref={setIntersection}>
             <div className='search-result-1'>
                 <SearchBarPhoto classValue="search-result-bar" searchBarValue={searchBarValue} setSearchBarValue={setSearchBarValue} />
                 <div className='search-result-checkbox'>
@@ -108,6 +130,7 @@ const SearchBar = ({
                         setSelectedValue={setImageType}
                         defaultVaueId={imageTypeId}
                         items={imageTypeDropdownItems}
+                        triggerClose={isSearchbarVisible}
                     />
                 </QueryChangeContext.Provider>
                 <QueryChangeContext.Provider value={paramsKeyValue.orientation}>
@@ -116,6 +139,7 @@ const SearchBar = ({
                         setSelectedValue={setOrientation}
                         defaultVaueId={oreintationId}
                         items={orientationDropdownItems}
+                        triggerClose={isSearchbarVisible}
                     />
                 </QueryChangeContext.Provider>
                 <QueryChangeContext.Provider value={paramsKeyValue.category}>
@@ -124,6 +148,7 @@ const SearchBar = ({
                         setSelectedValue={setCategory}
                         defaultVaueId={categoryId}
                         items={categoryDropdownItems}
+                        triggerClose={isSearchbarVisible}
                     />
                 </QueryChangeContext.Provider>
                 <QueryChangeContext.Provider value={paramsKeyValue.order}>
@@ -132,12 +157,14 @@ const SearchBar = ({
                         setSelectedValue={setOrder}
                         defaultVaueId={orderId}
                         items={orderDropdownItems}
+                        triggerClose={isSearchbarVisible}
                     />
                 </QueryChangeContext.Provider>
-                <ColorFilter  />
+                <ColorFilter triggerClose={isSearchbarVisible} />
                 <ClearFilter />
             </div>
         </div>
+        </>
     )
 }
 

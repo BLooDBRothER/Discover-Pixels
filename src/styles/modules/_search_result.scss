@@ -14,7 +14,7 @@
         // margin: 1.5rem 0;
         flex-wrap: wrap;
         & > *{
-            margin: .8rem 2rem;
+            margin: .8rem;
         }
     }
 
@@ -24,9 +24,10 @@
 
     &-dropdown{
         border-radius: 20px;
-        width: 160px;
+        width: clamp(140px, 17vw, 160px);
         background-color: $secondary-color;
         // margin:  0 2rem;
+        z-index: unset;
         &.active{
             border-radius: 20px 20px 0 0;
         }
@@ -35,7 +36,7 @@
             background-color: $secondary-color;
             border-radius: 0 0 20px 20px;
             overflow: hidden;
-            width: 160px;
+            width: clamp(140px, 17vw, 160px);
         }
         & .dropdown-title{
             padding: 0.3rem 0.5rem;
@@ -75,7 +76,45 @@
             background-color: $img-background;
             color: $secondary-color;
             border-color: $secondary-color;
-            width: 160px;
+            width: clamp(100px, 17vw, 160px);
+            border-radius: 0 0 25px 0;
+            overflow: hidden;
+            & > .dropdown-list{
+                padding: .5rem 0 .5rem 1rem;
+            }
+        }
+    }
+}
+
+.search-result-fixed-bar{
+    top: 0;
+    background-color: $primary-color;
+    opacity: .9;
+    left: 1rem;
+    width: 100%;
+    padding: 1rem;
+    position: sticky;
+    z-index: 10;
+    & .search-input-ic{
+        background-color: $secondary-color;
+        fill: $dark-accent;
+    }
+
+    & .search-dropdown{
+        width: clamp(100px, 17vw, 160px);
+        height: 40px;
+        border-radius: 0 25px 25px 0;
+        & .dropdown-title{            
+            padding: .5rem 0 0.5rem 1rem;
+            color: $secondary-color;
+            background-color: $img-background;
+        }
+
+        & .dropdown-lists{
+            background-color: $img-background;
+            color: $secondary-color;
+            border-color: $secondary-color;
+            width: clamp(100px, 17vw, 160px);
             border-radius: 0 0 25px 0;
             overflow: hidden;
             & > .dropdown-list{

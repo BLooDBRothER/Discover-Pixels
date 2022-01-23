@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef, useCallback } from 'react';
 import { useParams, useSearchParams } from 'react-router-dom';
 import Dropdown from '../dropdown/Dropdown';
 import SearchBarVideo from '../home_search/SearchBarVideo';
@@ -54,8 +54,28 @@ const SearchVideoBar = ({
     const [videoTypeId, setVideoTypeId] = useState(0);
     const [categoryId, setCategoryId] = useState(0);
     const [orderId, setOrderId] = useState(0);
+    const [isSearchbarVisible, setIsSearchbarVisible] = useState(false);
     
     const [searchBarValue, setSearchBarValue] = useState(params.searchKey);
+
+    const observer = useRef();
+    const setIntersection = useCallback((node) => {
+        if(!node) return;
+        if(observer.current) observer.current.disconnect();
+        observer.current = new IntersectionObserver((entry) => {
+            if(entry[0].intersectionRatio === 0){
+                setIsSearchbarVisible(true);
+            }
+            else{
+                setIsSearchbarVisible(false);
+            }
+        })
+        observer.current.observe(node);
+    });
+
+    useEffect(() => {
+        return () => {observer.current?.disconnect()}
+    }, []);
 
     const updateLocalStorage = () => {
         localStorage.setItem("safeSearch", isSafeSearchEnabled);
@@ -81,7 +101,9 @@ const SearchVideoBar = ({
     }, [isSafeSearchEnabled, isEditorChoiceEnabled]);
 
     return (
-        <div className='search-result'>
+        <>
+        {isSearchbarVisible && <SearchBarVideo classValue="search-result-fixed-bar" searchBarValue={searchBarValue} setSearchBarValue={setSearchBarValue} />}
+        <div className='search-result' ref={setIntersection}>
             <div className='search-result-1'>
                 <SearchBarVideo classValue="search-result-bar" searchBarValue={searchBarValue} setSearchBarValue={setSearchBarValue} />
                 <div className='search-result-checkbox'>
@@ -96,6 +118,7 @@ const SearchVideoBar = ({
                         setSelectedValue={setVideoType}
                         defaultVaueId={videoTypeId}
                         items={videoTypeDropdownItems}
+                        triggerClose={isSearchbarVisible}
                     />
                 </QueryChangeContext.Provider>
                 <QueryChangeContext.Provider value={paramsKeyValue.category}>
@@ -104,6 +127,7 @@ const SearchVideoBar = ({
                         setSelectedValue={setCategory}
                         defaultVaueId={categoryId}
                         items={categoryDropdownItems}
+                        triggerClose={isSearchbarVisible}
                     />
                 </QueryChangeContext.Provider>
                 <QueryChangeContext.Provider value={paramsKeyValue.order}>
@@ -112,11 +136,13 @@ const SearchVideoBar = ({
                         setSelectedValue={setOrder}
                         defaultVaueId={orderId}
                         items={orderDropdownItems}
+                        triggerClose={isSearchbarVisible}
                     />
                 </QueryChangeContext.Provider>
-                <ClearFilter />
+                <ClearFilter triggerClose={isSearchbarVisible} />
             </div>
         </div>
+        </>
     )
 }
 

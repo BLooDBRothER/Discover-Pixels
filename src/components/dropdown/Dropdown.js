@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { FaCaretDown, FaCaretUp } from 'react-icons/fa';
 import DropdownList from './DropdownList';
 
-const Dropdown = ({classValue, setSelectedValue, defaultVaueId=0, items, enableHoverEffect=false}) => {
+const Dropdown = ({classValue, setSelectedValue, defaultVaueId=0, items, triggerClose=false, enableHoverEffect=false}) => {
     
     const [selected, setSelected] = useState({});
     const [isOpen, setIsOpen] = useState(false);
@@ -24,6 +24,11 @@ const Dropdown = ({classValue, setSelectedValue, defaultVaueId=0, items, enableH
         setSelected(items[defaultVaueId]);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [defaultVaueId]);
+
+    useEffect(() => {
+        if(!triggerClose) return;
+        setIsOpen(false);
+    }, [triggerClose])
 
     const toggleDropdown = (value) => {
         setIsOpen(value);
