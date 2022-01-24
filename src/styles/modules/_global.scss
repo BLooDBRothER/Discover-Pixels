@@ -68,6 +68,10 @@ a{
   }
 }
 
+.accent{
+  color: $light-accent;
+}
+
 @mixin flexSetting($justify, $align, $isColumn: false) {
   display: flex;
   

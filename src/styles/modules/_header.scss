@@ -3,7 +3,7 @@
     @include flexSetting(space-between, center);
     color: $secondary-color;
     position: relative;
-
+    height: $header-height;
     &-title{
         cursor: pointer;
         font-size: clamp(.8rem, 5vw, 2rem);
@@ -32,6 +32,16 @@
         &-ic{
             margin-right: .5rem;
             color: $light-accent;
+            fill: $light-accent;
+        }
+
+        & .credit--link-ic{
+            & > path{
+                fill: $light-accent;
+            }
+            & > g{
+                fill: $primary-color;
+            }
         }
 
         &:hover{

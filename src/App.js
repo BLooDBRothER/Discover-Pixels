@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Credit from "./components/credit/Credit";
 import Header from "./components/header/Header";
 import HomePhoto from "./components/home_photo/HomePhoto";
 import SearchPhoto from "./components/home_search/SearchPhoto";
@@ -49,8 +50,9 @@ function App() {
              <Route path="image/:searchKey" element={<SearchPage setIsNavbarVisible={setIsNavbarVisible} />} />
              <Route path="video/:searchKey" element={<SearchVideoPage setIsNavbarVisible={setIsNavbarVisible} />} />
            </Route>
-           <Route path="image/:imageId" element={<ImagePage setIsNavbarVisible={setIsNavbarVisible} />}/>
-           <Route path="vid/:videoId" element={<VideoPage setIsNavbarVisible={setIsNavbarVisible} />}/>
+          <Route path="image/:imageId" element={<ImagePage setIsNavbarVisible={setIsNavbarVisible} />}/>
+          <Route path="vid/:videoId" element={<VideoPage setIsNavbarVisible={setIsNavbarVisible} />}/>
+          <Route path="credit" element={<Credit setIsNavbarVisible={setIsNavbarVisible} />} /> 
         </Route>
       </Routes>
     </BrowserRouter>

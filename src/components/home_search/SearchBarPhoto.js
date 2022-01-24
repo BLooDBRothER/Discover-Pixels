@@ -39,8 +39,8 @@ const SearchBarPhoto = ({classValue, searchBarValue, setSearchBarValue}) => {
     }
 
     const triggerSearch = (e) => {
-        if((e._reactName === "onKeyPress" && !e.code.includes("Enter")) || searchBarValue === "") return;
         e.preventDefault();
+        if(searchBarValue === "") return;
         if(params.searchKey === searchBarValue) return;
         const getSearchParams = returnSearchParams();
         const searchParamsString = getSearchParams === "" ? "" : `?${getSearchParams}`;
@@ -48,9 +48,9 @@ const SearchBarPhoto = ({classValue, searchBarValue, setSearchBarValue}) => {
     }
 
     return (
-        <form className={`search-form ${classValue}`} onSubmit={(e) => {e.preventDefault()}}>
+        <form className={`search-form ${classValue}`} onSubmit={triggerSearch}>
             <div className='search-input'>
-                <input type="text" placeholder='Search Images powered By pixabay' value={searchBarValue} onChange={(e) => {setSearchBarValue(e.target.value)}} className='search-input-value' onKeyPress={triggerSearch} />
+                <input type="text" placeholder='Search Images powered By pixabay' value={searchBarValue} onChange={(e) => {setSearchBarValue(e.target.value)}} className='search-input-value'/>
                 <FaSearch className='search-input-ic' onClick={triggerSearch}/>
             </div>
             <Dropdown

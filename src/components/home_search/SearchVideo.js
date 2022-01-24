@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import SearchBarVideo from './SearchBarVideo';
 import SearchFooter from './SearchFooter';
-import video_bg from '../../Assets/bg_video.mp4';
+import video_bg from '../../Assets/bg_video_1.mp4';
 
 const SearchVideo = ({setIsNavbarVisible}) => {
    const [searchBarValue, setSearchBarValue] = useState("");

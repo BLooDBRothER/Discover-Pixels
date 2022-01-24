@@ -124,6 +124,7 @@ const ColorFilter = ({triggerClose = false}) => {
         console.log(tempColorList);
         const temp = [...(new Set(tempColorList))];
         setTempColorList(temp);
+        setColorArray(temp);
         const queryParams = {colors: temp};
         for(const entry of searchParams.entries()){
             if(entry[0] === "colors") continue;
