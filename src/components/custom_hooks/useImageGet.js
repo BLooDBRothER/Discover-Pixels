@@ -29,7 +29,6 @@ const useImageGet = (q, image_type, order, orientation, category, safesearch=fal
                 url: "https://pixabay.com/api/",
                 params: {key: process.env.REACT_APP_PIXABAY_KEY, q, image_type, order, orientation, category, safesearch,  page: pageNumber, per_page, editors_choice, colors: colorList},
             });
-            console.log(res.data);
             if((pageNumber*per_page) >= res.data.totalHits || res.data.totalHits <= pageNumber){
                     setHasMore(false);
             }

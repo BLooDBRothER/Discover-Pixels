@@ -6,7 +6,6 @@ const TagButton = ({value, navigateUrl}) => {
     const navigatCategory = () => {
         navigate(navigateUrl);
     }
-    // console.log(value?.split(", ").map(tag => {console.log(tag); return tag;}));
     return (
         <div className='category-button' onClick={navigatCategory}>{value}</div>
     )

@@ -38,8 +38,6 @@ const HomePhoto = () => {
     const [pageNumber, setPageNumber] = useState(1);
 
     const {imageData, hasMore} = useImageOrderQuery(order, pageNumber);
-    // const imageData = imgData;
-    console.log(imageData, hasMore);
 
     useEffect(() => {
         setOrder(dropdownValue.toLowerCase());

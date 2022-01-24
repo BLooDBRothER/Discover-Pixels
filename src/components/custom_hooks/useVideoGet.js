@@ -28,7 +28,6 @@ const useVideoGet = (q, video_type, order, orientation, category, safesearch=fal
                 url: "https://pixabay.com/api/videos/",
                 params: {key: process.env.REACT_APP_PIXABAY_KEY, q, video_type, order, orientation, category, safesearch,  page: pageNumber, per_page, editors_choice},
             });
-            console.log(res.data);
             if((pageNumber*per_page) >= res.data.totalHits || res.data.totalHits <= pageNumber){
                     setHasMore(false);
             }

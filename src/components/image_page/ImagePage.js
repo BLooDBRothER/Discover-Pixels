@@ -19,8 +19,7 @@ const ImagePage = ({setIsNavbarVisible}) => {
 
     useEffect(() => {
         async function getData(){
-            const data = await axios.get(`https://pixabay.com/api/?key=20726322-5f0bca4f140876f7d307a8d94&id=${imageId}`)
-            console.log(data.data.hits[0]);
+            const data = await axios.get(`https://pixabay.com/api/?key=${process.env.REACT_APP_PIXABAY_KEY}&id=${imageId}`);
             setImageData(data.data.hits[0]);
         }
         getData();
@@ -30,7 +29,9 @@ const ImagePage = ({setIsNavbarVisible}) => {
 
     return (
         <div className='main-image'>
-            <img className='main-image--img' src={imageData.largeImageURL} alt={imageData.tags} />
+            <div className='main-image--cnt'>
+                <img className='main-image--img' src={imageData.largeImageURL} alt={imageData.tags} />
+            </div>
             <div className='image-data'>
                 <ImageUserData name={imageData.user} picUrl={imageData.userImageURL} navigateUrl={`/search/image/user:${imageData.user}`} />
                 <ImageMetadata size={imageData.imageSize} maxHeight={imageData.imageHeight} maxWidth={imageData.imageWidth} type={imageData.type} />

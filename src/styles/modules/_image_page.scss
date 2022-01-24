@@ -2,14 +2,26 @@
     height: calc(100vh - 100px);
     @include flexSetting(flex-start, center);
     width: 100vw;
-    padding: 0 1rem;
+    padding: .5rem 1rem;
     color: $secondary-color;
+    &--cnt{
+        @include flexSetting(center, center);
+        background-color: $img-background;
+        padding: .5rem;
+        flex: 1.2;
+        height: 90%;
+    }
+    & .main-video--cnt{
+        background-color: rgba(255, 255, 255, 0.1);
+    }
     &--img, &--vid{
-        width: 50%;
+        max-width: 100%;
+        max-height: 100%;
     }
     & .image-data{
         flex: 1;
-        height: 80%;
+        width: 90%;
+        height: 90%;
         border: 1px solid $secondary-color;
         padding: 1rem 1rem 5rem 1rem;
         @include flexSetting(space-between, center, true);
@@ -24,13 +36,14 @@
             cursor: pointer;
             z-index: 2;
             padding: .5rem 1rem;
+            font-size: clamp(.8rem, 4vw, 1.3rem);
             border-radius: 20px;
 
             & .link-arrow{
                 fill: white;
                 color: white;
-                width: 40px;
-                height: 40px;
+                width: clamp(20px, 7vw, 40px);
+                height: clamp(20px, 7vw, 40px);
                 position: absolute;
                 top: 50%;
                 left: 0;
@@ -66,8 +79,8 @@
         }
 
         &-pic{
-            width: 100px;
-            height: 100px;
+            width: clamp(40px, 15vw, 100px);
+            height: clamp(40px, 15vw, 100px);
             border-radius: 50%;
         }
     }
@@ -75,13 +88,16 @@
         margin: 1rem;
         &--title{
             text-decoration: underline;
+            font-size: clamp(.8rem, 4vw, 1.4rem);
             // color: 
         }
         &--container{
             @include flexSetting(flex-start, center);
             font-weight: bold;
             margin-top: 1rem;
+            font-size: clamp(.8rem, 3vw, 1.2rem);
             padding: .5rem;
+            white-space: nowrap;
             & > h3{
                 margin-right: 1rem;
                 text-decoration: underline;
@@ -93,32 +109,33 @@
     }
     & .download-button{
         position: relative;
+        margin: 1rem 0;
         margin-right: 100px;
         @include flexSetting(center, center);
         cursor: pointer;
         & .button-ic{
-            width: 40px;
-            height: 40px;
+            width: clamp(20px, 7vw, 40px);
+            height: clamp(20px, 7vw, 40px);
             background-color: $secondary-color;
             color: $primary-color;
-            border-radius: 40px;
+            border-radius: clamp(20px, 7vw, 40px);
             padding: .5rem;
             box-sizing: unset;
         }
         & .button-value{
             @include flexSetting(center, center);
-            height: 40px;
+            height: clamp(20px, 7vw, 40px);
             width: 130px;
             padding: .5rem 1rem;
             box-sizing: unset;
-            font-size: 1.4rem;
+            font-size: clamp(.8rem, 4vw, 1.4rem);
             position: absolute;
             top: 50%;
             left: 100%;
             transform: translateY(-50%);
             color: $secondary-color;
             font-weight: bold;
-            border-radius: 0 40px 40px 0px;
+            border-radius: 0 clamp(20px, 7vw, 40px) clamp(20px, 7vw, 40px) 0px;
 
             &::before{
                 content: '';
@@ -133,7 +150,7 @@
         }
         &:hover{
             & .button-ic{
-                border-radius: 40px 0 0 40px;
+                border-radius: clamp(20px, 7vw, 40px) 0 0 clamp(20px, 7vw, 40px);
                 animation: increaseBorder .3s linear;
             }
             & .button-value{
@@ -143,20 +160,22 @@
                 &::before{
                     width: 162px;
                     animation: increaseWidth .5s linear;
-                    border-radius: 0 40px 40px 0px;
+                    border-radius: 0 clamp(20px, 7vw, 40px) clamp(20px, 7vw, 40px) 0px;
                 }
             }
         }
     }
     & .image-data-category{
         @include flexSetting(space-evenly, center);
+        flex-wrap: wrap;
         width: 100%;
     }
     & .category-button{
-        font-size: 1.4rem;
+        font-size: clamp(.8rem, 4vw, 1.4rem);
         font-weight: bold;
         border: 2px solid $light-accent;
         padding: .5rem 1rem;
+        margin: .5rem;
         border-radius: 20px;
         cursor: pointer;
         // box-shadow: 0 0 30px 0px $light-accent;
@@ -233,9 +252,29 @@
 
 @keyframes increaseBorder {
     0%{
-        border-radius: 40px;
+        border-radius: clamp(20px, 7vw, 40px);
     }
     100%{
-        border-radius: 40px 0px 0px 40px;
+        border-radius: clamp(20px, 7vw, 40px) 0px 0px clamp(20px, 7vw, 40px);
     }
+}
+
+@media (max-width: 1150px){
+    .main-image, .main-video{
+        height: unset;
+        max-height: 150vh;
+        @include flexSetting(flex-start, center, true);
+        &--cnt{
+            width: 90%;
+            max-height: 100%;
+        }
+        &--img, &--vid{
+            max-width: 100%;
+            max-height: 100vh;
+        }
+        & .image-data{
+            padding: 1rem 1rem 3rem 1rem;
+        }
+    }
+
 }

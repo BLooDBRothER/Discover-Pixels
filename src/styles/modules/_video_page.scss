@@ -9,18 +9,29 @@
         background-color: $secondary-color;
         color: $primary-color;
         margin: 0 1rem;
-        width: 250px;
+        width: clamp(100px,35vw, 250px);
         border-radius: 20px;
         &-title{
             padding: .5rem;
         }
         &-lists{
-            width: 250px;
+            width: clamp(100px,35vw, 250px);
             border-radius: 0 0 20px 20px;
             background-color: $secondary-color;
             & > * {
                 padding: .5rem;
             }
+        }
+    }
+}
+
+@media (max-width: 780px){
+    .main-video{
+        &--download{
+            @include flexSetting(center, center, true);
+        }
+        & .dropdown{
+            margin: .5rem 1rem;
         }
     }
 }

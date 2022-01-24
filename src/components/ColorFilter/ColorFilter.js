@@ -86,8 +86,6 @@ const ColorFilter = ({triggerClose = false}) => {
         setIsOpen(false);
     }, [triggerClose])
 
-    useEffect(() => {console.log(tempColorList)}, [tempColorList])
-
     useEffect(() => {
         if(isGrayscale){
             setTempColorList(prev => [...prev, "grayscale"]);
@@ -121,7 +119,6 @@ const ColorFilter = ({triggerClose = false}) => {
     }
 
     const updateColorList = () => {
-        console.log(tempColorList);
         const temp = [...(new Set(tempColorList))];
         setTempColorList(temp);
         setColorArray(temp);
@@ -130,7 +127,6 @@ const ColorFilter = ({triggerClose = false}) => {
             if(entry[0] === "colors") continue;
             queryParams[entry[0]] = entry[1];
         }
-        console.log(queryParams);
         setSearchParams(queryParams);
         setIsOpen(false);
     }

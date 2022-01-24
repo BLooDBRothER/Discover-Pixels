@@ -9,7 +9,7 @@ import { useMediaQuery } from 'react-responsive';
 const Navbar = () => {
     // Media query
     const toMinimizeNavbar = useMediaQuery({
-        query: "(max-width: 550px)",
+        query: "(max-width: 600px)",
     });
 
     const [toShowNavbar, setToShowNavbar] = useState(false);

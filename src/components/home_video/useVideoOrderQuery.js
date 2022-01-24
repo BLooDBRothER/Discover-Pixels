@@ -18,7 +18,6 @@ const useVideoOrderQuery = (order, pageNumber) => {
             url: "https://pixabay.com/api/videos/",
             params: {key: process.env.REACT_APP_PIXABAY_KEY, q:"*", category: getRandomCategory(), order: order, page: pageNumber, per_page, safesearch: true},
         }).then(res => {
-            console.log(res);
             if((pageNumber*per_page) >= res.data.totalHits){
                 setHasMore(false);
             }

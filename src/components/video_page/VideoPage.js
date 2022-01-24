@@ -24,16 +24,13 @@ const VideoPage = ({setIsNavbarVisible}) => {
     useEffect(() => {
         dropdownItems.forEach(item => {
             if(selectedSize === item.value){
-                console.log(item);
                 setDownloadUrl(`${videoData.videos[item.id].url}&download=1`);
             }
         })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     },[selectedSize]);
 
-    useEffect(() => {console.log(videoUrl, downloadUrl)}, [videoUrl, downloadUrl]);
-
     const createDropdownItems = (data) => {
-        console.log(data);
         const items = [];
         for(const key in data){
             const item = {
@@ -42,14 +39,12 @@ const VideoPage = ({setIsNavbarVisible}) => {
             }
             items.push(item);
         }
-        console.log(items);
         setDropdownItems(items);
     }
 
     useEffect(() => {
         async function getData(){
-            const data = await axios.get(`https://pixabay.com/api/videos/?key=20726322-5f0bca4f140876f7d307a8d94&id=${videoId}`)
-            console.log(data.data.hits[0]);
+            const data = await axios.get(`https://pixabay.com/api/videos/?key=${process.env.REACT_APP_PIXABAY_KEY}&id=${videoId}`);
             setVideoData(data.data.hits[0]);
             setVideoUrl(data.data.hits[0].videos.large.url);
             setDownloadUrl(`${data.data.hits[0].videos.large.url}&download=1`);
@@ -62,10 +57,12 @@ const VideoPage = ({setIsNavbarVisible}) => {
 
     return (
         <div className='main-video'>
-            {videoUrl !== "" ? <video className='main-video--vid' controls="controls">
-               <source src={videoUrl} alt={videoData.tags}/>
-            </video>
-            :  <BiLoaderCircle className="loader-ic" />}
+            <div className='main-video--cnt'>
+                {videoUrl !== "" ? <video className='main-video--vid' controls="controls">
+                   <source src={videoUrl} alt={videoData.tags}/>
+                </video>
+                :  <BiLoaderCircle className="loader-ic" />}
+            </div>
             <div className='image-data'>
                 <ImageUserData name={videoData.user} picUrl={videoData.userImageURL} navigateUrl={`/search/video/user:${videoData.user}`} />
                 <VideoMetadata sec={videoData.duration} maxHeight={videoData?.videos?.large.height} maxWidth={videoData?.videos?.large.width} type={videoData.type} />

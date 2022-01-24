@@ -9,21 +9,6 @@ const Videos = ({videoItems, containers}) => {
     useEffect(() => {
         let list = [];
         for(let i=0; i<containers; i++){
-            // if(i === (containers-1)){
-            //     console.log(lastVideoRef)
-            //     list.push((
-            //         <div key={i} className='media-container video-container'>
-            //             <Video videoItems={videoItems} indexPosition={i} videoX={containers}  lastVideoRef={lastVideoRef}/>
-            //         </div>
-            //     ));
-            // }
-            // else{
-            //     list.push((
-            //         <div key={i} className='media-container video-container'>
-            //             <Video videoItems={videoItems} indexPosition={i} videoX={containers} />
-            //         </div>
-            //     ));
-            // }
             list.push((
                 <div key={i} className='media-container video-container'>
                     <Video videoItems={videoItems} indexPosition={i} videoX={containers} />

@@ -87,7 +87,6 @@ const SearchVideoBar = ({
     }, [params]);
 
     useEffect(() => {
-        // console.log(params);
         const [videoId, categoryId, orderId] = getSearchParamsId(searchParams.entries());
         setVideoTypeId(videoId);
         setCategoryId(categoryId);
